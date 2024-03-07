@@ -8,7 +8,7 @@ const Register = () => {
     lastName: "",
     mobile: "",
     email: "",
-    accountNumber: "",
+    adharNumber: "",
     panCardNumber: "",
     gstNumber: "",
     address: "",
@@ -17,6 +17,11 @@ const Register = () => {
     village: "",
     pinCode: "",
     role: "",
+    account: "",
+    acName: "",
+    ifsc: "",
+    branchName: "",
+    bankName: "",
   });
 
   const handleInputChange = (event) => {
@@ -30,6 +35,11 @@ const Register = () => {
   const handleRoleChange = (event) => {
     setRole(event.target.value);
     setFormData({ ...formData, role: event.target.value });
+  };
+
+  const handleBankChange = (event) => {
+    setBank(event.target.value);
+    setFormData({ ...formData, bank: event.target.value });
   };
 
   const validateMobile = (mobile) => {
@@ -54,7 +64,7 @@ const Register = () => {
         lastName: "",
         mobile: "",
         email: "",
-        accountNumber: "",
+        adharNumber: "",
         panCardNumber: "",
         gstNumber: "",
         address: "",
@@ -63,18 +73,24 @@ const Register = () => {
         village: "",
         pinCode: "",
         role: "",
+        account: "",
+        acName: "",
+        ifsc: "",
+        branchName: "",
+        bankName: "",
       });
     } catch (error) {
       console.error("Error registering user:", error);
     }
   };
 
-
   return (
-    <div className="container mx-auto flex flex-col items-center">
-      <h2 className="text-2xl font-bold mb-4">Register</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="container mx-auto flex justify-center">
+    <div className="w-full bg-white shadow-md rounded-lg overflow-hidden">
+      <div className="py-4 px-6">
+        <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label htmlFor="firstName" className="block mb-1">
               First Name
@@ -132,15 +148,15 @@ const Register = () => {
             />
           </div>
           <div>
-            <label htmlFor="adharCardNumber" className="block mb-1">
-              Adhar Cad Number
+            <label htmlFor="adharNumber" className="block mb-1">
+              Adhar Card Number
             </label>
             <input
               type="text"
-              id="adharCardNumber"
-              name="adharCardNumber"
+              id="adharNumber"
+              name="adharNumber"
               autoComplete="off"
-              value={formData.accountNumber}
+              value={formData.adharNumber}
               onChange={handleInputChange}
               className="w-full px-4 py-2 border rounded-md"
             />
@@ -191,6 +207,99 @@ const Register = () => {
               name="gstNumber"
               autoComplete="off"
               value={formData.gstNumber}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-md"
+            />
+          </div>
+          <div>
+            <label htmlFor="account" className="block mb-1">
+              Bank A/C Number
+            </label>
+            <input
+              type="text"
+              id="account"
+              name="account"
+              autoComplete="off"
+              value={formData.account}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-md"
+            />
+          </div>
+          <div>
+            <label htmlFor="picture" className="block mb-1">
+              Upload GST Cirtificate
+            </label>
+            <input
+              type="file"
+              id="picture"
+              name="picture"
+              className="w-full px-4 py-2 border rounded-md"
+            />
+          </div>
+          <div>
+            <label htmlFor="picture" className="block mb-1">
+              Upload Your Passbook/checkbook
+            </label>
+            <input
+              type="file"
+              id="picture"
+              name="picture"
+              className="w-full px-4 py-2 border rounded-md"
+            />
+          </div>
+          <div>
+            <label htmlFor="accountHolderName" className="block mb-1">
+              Account Holder Name
+            </label>
+            <input
+              type="text"
+              id="acName"
+              name="acName"
+              autoComplete="off"
+              value={formData.acName}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-md"
+            />
+          </div>
+          <div>
+            <label htmlFor="ifsc" className="block mb-1">
+              IFSC Code
+            </label>
+            <input
+              type="text"
+              id="ifsc"
+              name="ifsc"
+              autoComplete="off"
+              value={formData.ifsc}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-md"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="branchName" className="block mb-1">
+              Branch Name
+            </label>
+            <input
+              type="text"
+              id="branchName"
+              name="branchName"
+              autoComplete="off"
+              value={formData.branchName}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded-md"
+            />
+          </div>
+          <div>
+          <label htmlFor="bankName" className="block mb-1">
+              Bank Name
+            </label>
+            <input
+              type="text"
+              id="bankName"
+              name="bankName"
+              autoComplete="off"
+              value={formData.bankName}
               onChange={handleInputChange}
               className="w-full px-4 py-2 border rounded-md"
             />
@@ -279,17 +388,7 @@ const Register = () => {
               <option value="farmer">Farmer</option>
             </select>
           </div>
-          <div>
-            <label htmlFor="picture" className="block mb-1">
-              Upload Your Photo
-            </label>
-            <input
-              type="file"
-              id="picture"
-              name="picture"
-              className="w-full px-4 py-2 border rounded-md"
-            />
-          </div>
+
           <div className="flex justify-center">
             <div className="w-full max-w-xs">
               <button
@@ -300,8 +399,10 @@ const Register = () => {
               </button>
             </div>
           </div>
+          </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   );
 };
