@@ -20,13 +20,18 @@ const Dashboard = () => {
               </Link>
             </li>
             <li className="py-2">
-              <Link to="/services" className="block hover:text-green-400">
-                Services
+              <Link to="/EmployeeList" className="block hover:text-green-400">
+              EmployeeList
               </Link>
             </li>
             <li className="py-2">
-              <Link to="/contact" className="block hover:text-green-400">
-                Contact
+              <Link to="/EmployeeLogin" className="block hover:text-green-400">
+                EmployeeLogin
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link to="/EmployeeRegister" className="block hover:text-green-400">
+                EmployeeRegister
               </Link>
             </li>
           </ul>
