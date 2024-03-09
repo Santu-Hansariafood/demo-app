@@ -26,12 +26,12 @@ const Dashboard = () => {
             </li>
             <li className="py-2">
               <Link to="/EmployeeList" className="block hover:text-green-400">
-                EmployeeList
+                Employee List
               </Link>
             </li>
             <li className="py-2">
               <Link to="/EmployeeLogin" className="block hover:text-green-400">
-                EmployeeLogin
+                Employee Login
               </Link>
             </li>
             <li className="py-2">
@@ -39,7 +39,7 @@ const Dashboard = () => {
                 to="/EmployeeRegister"
                 className="block hover:text-green-400"
               >
-                EmployeeRegister
+                Employee Register
               </Link>
             </li>
             <li className="py-2">
