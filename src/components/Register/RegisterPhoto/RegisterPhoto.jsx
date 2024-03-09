@@ -227,7 +227,7 @@ const RegisterPhoto = () => {
               {/* File upload inputs */}
               {/* Aadhaar Card */}
               <div>
-                <label htmlFor="aadhaarCard" className="block mb-1">
+                <label htmlFor="aadhaarCard" className="block mb-1 text-green-500">
                   Aadhaar Card:
                 </label>
                 <input
@@ -248,7 +248,7 @@ const RegisterPhoto = () => {
               </div>
               {/* PAN Card */}
               <div>
-                <label htmlFor="panCard" className="block mb-1">
+                <label htmlFor="panCard" className="block mb-1 text-green-500">
                   PAN Card:
                 </label>
                 <input
@@ -267,7 +267,7 @@ const RegisterPhoto = () => {
               </div>
               {/* GST Certificate */}
               <div>
-                <label htmlFor="gstCertificate" className="block mb-1">
+                <label htmlFor="gstCertificate" className="block mb-1 text-green-500">
                   GST Certificate:
                 </label>
                 <input
@@ -286,7 +286,7 @@ const RegisterPhoto = () => {
               </div>
               {/* Bank Account */}
               <div>
-                <label htmlFor="bankAccount" className="block mb-1">
+                <label htmlFor="bankAccount" className="block mb-1 text-green-500">
                   Bank Account:
                 </label>
                 <input
@@ -305,7 +305,7 @@ const RegisterPhoto = () => {
               </div>
               {/* Profile Photo */}
               <div>
-                <label htmlFor="profilePhoto" className="block mb-1">
+                <label htmlFor="profilePhoto" className="block mb-1 text-green-500">
                   Profile Photo:
                 </label>
                 <input
