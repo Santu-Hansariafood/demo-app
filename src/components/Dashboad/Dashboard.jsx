@@ -37,6 +37,14 @@ const Dashboard = () => {
                 EmployeeRegister
               </Link>
             </li>
+            <li className="py-2">
+              <Link
+                to="/RegisterPhoto"
+                className="block hover:text-green-400"
+              >
+                Farmer Document
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
