@@ -8,7 +8,7 @@ import Register from "./components/Register/Register";
 import Dashboard from "./components/Dashboad/Dashboard";
 import EmployeeRegister from "./components/Employee/EmployeeRegister/EmployeeRegister";
 import EmployeeList from "./components/Employee/EmployeeList/EmployeeList";
-
+import RegisterPhoto from "./components/Register/RegisterPhoto/RegisterPhoto";
 function App() {
   return (
     <>
@@ -22,6 +22,7 @@ function App() {
           <Route path="Dashboard" element={<Dashboard />} />
           <Route path="EmployeeRegister" element={<EmployeeRegister/>} />
           <Route path="EmployeeList" element={<EmployeeList />} />
+          <Route path='RegisterPhoto'  element={<RegisterPhoto />} />
         </Routes>
       </BrowserRouter>
     </>

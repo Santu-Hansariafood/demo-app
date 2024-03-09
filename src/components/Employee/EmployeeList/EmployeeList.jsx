@@ -9,7 +9,9 @@ const EmployeeList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/employeeRegister");
+        const response = await axios.get(
+          "http://localhost:3000/employeeRegister"
+        );
         setEmployees(response.data);
         setSuccessMessage("Live");
       } catch (error) {
@@ -25,7 +27,9 @@ const EmployeeList = () => {
 
   return (
     <div className="container mx-auto mt-8">
-      <h2 className="text-2xl font-bold mb-4 text-center text-green-600">Employee List</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center text-green-600">
+        Employee List
+      </h2>
       {successMessage && <p className="text-green-500">{successMessage}</p>}
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       <div className="overflow-x-auto">
@@ -36,7 +40,7 @@ const EmployeeList = () => {
               <th className="px-4 py-2 text-white">Last Name</th>
               <th className="px-4 py-2 text-white">Mobile Number</th>
               <th className="px-4 py-2 text-white">Email ID</th>
-              {/* <th className="px-4 py-2">Action</th> */}
+              <th className="px-4 py-2 text-white">Password</th>
             </tr>
           </thead>
           <tbody>
@@ -46,6 +50,7 @@ const EmployeeList = () => {
                 <td className="border px-4 py-2">{employee.lastname}</td>
                 <td className="border px-4 py-2">{employee.mobile}</td>
                 <td className="border px-4 py-2">{employee.email}</td>
+                <td className="border px-4 py-2">{employee.password}</td>
               </tr>
             ))}
           </tbody>

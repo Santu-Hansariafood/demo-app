@@ -11,7 +11,7 @@ const Dashboard = () => {
           <ul className="mt-4">
             <li className="py-2">
               <Link to="/register" className="block hover:text-green-400">
-                Register
+                Fermer Register
               </Link>
             </li>
             <li className="py-2">
@@ -21,7 +21,7 @@ const Dashboard = () => {
             </li>
             <li className="py-2">
               <Link to="/EmployeeList" className="block hover:text-green-400">
-              EmployeeList
+                EmployeeList
               </Link>
             </li>
             <li className="py-2">
@@ -30,7 +30,10 @@ const Dashboard = () => {
               </Link>
             </li>
             <li className="py-2">
-              <Link to="/EmployeeRegister" className="block hover:text-green-400">
+              <Link
+                to="/EmployeeRegister"
+                className="block hover:text-green-400"
+              >
                 EmployeeRegister
               </Link>
             </li>
