@@ -11,7 +11,12 @@ const Dashboard = () => {
           <ul className="mt-4">
             <li className="py-2">
               <Link to="/register" className="block hover:text-green-400">
-                Fermer Register
+                Farmer Register
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link to="/RegisterList" className="block hover:text-green-400">
+                Farmer List
               </Link>
             </li>
             <li className="py-2">

@@ -9,6 +9,9 @@ import Dashboard from "./components/Dashboad/Dashboard";
 import EmployeeRegister from "./components/Employee/EmployeeRegister/EmployeeRegister";
 import EmployeeList from "./components/Employee/EmployeeList/EmployeeList";
 import RegisterPhoto from "./components/Register/RegisterPhoto/RegisterPhoto";
+import RegisterList from "./components/Register/RegisterData/RegisterList";
+
+
 function App() {
   return (
     <>
@@ -20,9 +23,10 @@ function App() {
           <Route path="AdminLogin" element={<AdminLogin />} />
           <Route path="Register" element={<Register />} />
           <Route path="Dashboard" element={<Dashboard />} />
-          <Route path="EmployeeRegister" element={<EmployeeRegister/>} />
+          <Route path="EmployeeRegister" element={<EmployeeRegister />} />
           <Route path="EmployeeList" element={<EmployeeList />} />
-          <Route path='RegisterPhoto'  element={<RegisterPhoto />} />
+          <Route path="RegisterPhoto" element={<RegisterPhoto />} />
+          <Route path="RegisterList" element={<RegisterList/>} />
         </Routes>
       </BrowserRouter>
     </>
