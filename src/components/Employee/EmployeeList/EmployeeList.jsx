@@ -36,8 +36,8 @@ const EmployeeList = () => {
         <table className="table-auto w-full border-collapse border border-green-800">
           <thead>
             <tr className="bg-green-500">
-              <th className="px-4 py-2 text-white">First Name</th>
-              <th className="px-4 py-2 text-white">Last Name</th>
+              <th className="px-4 py-2 text-white">Full Name</th>
+              {/* <th className="px-4 py-2 text-white">Last Name</th> */}
               <th className="px-4 py-2 text-white">Mobile Number</th>
               <th className="px-4 py-2 text-white">Email ID</th>
               <th className="px-4 py-2 text-white">Password</th>
@@ -46,8 +46,8 @@ const EmployeeList = () => {
           <tbody>
             {employees.map((employee, index) => (
               <tr key={index} className={index % 2 === 0 ? "bg-green-100" : ""}>
-                <td className="border px-4 py-2">{employee.firstname}</td>
-                <td className="border px-4 py-2">{employee.lastname}</td>
+                <td className="border px-4 py-2">{employee.firstname}{" "}{employee.lastname}</td>
+                {/* <td className="border px-4 py-2">{employee.lastname}</td> */}
                 <td className="border px-4 py-2">{employee.mobile}</td>
                 <td className="border px-4 py-2">{employee.email}</td>
                 <td className="border px-4 py-2">{employee.password}</td>
