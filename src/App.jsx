@@ -10,7 +10,7 @@ import EmployeeRegister from "./components/Employee/EmployeeRegister/EmployeeReg
 import EmployeeList from "./components/Employee/EmployeeList/EmployeeList";
 import RegisterPhoto from "./components/Register/RegisterPhoto/RegisterPhoto";
 import RegisterList from "./components/Register/RegisterData/RegisterList";
-
+// import UploadAadher from "./components/Register/RegisterPhoto/UploadAadher/UploadAadher";
 
 function App() {
   return (
@@ -26,7 +26,8 @@ function App() {
           <Route path="EmployeeRegister" element={<EmployeeRegister />} />
           <Route path="EmployeeList" element={<EmployeeList />} />
           <Route path="RegisterPhoto" element={<RegisterPhoto />} />
-          <Route path="RegisterList" element={<RegisterList/>} />
+          <Route path="RegisterList" element={<RegisterList />} />
+          {/* <Route path="UploadAadher" element={<UploadAadher/>}/> */}
         </Routes>
       </BrowserRouter>
     </>

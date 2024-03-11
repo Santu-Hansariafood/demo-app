@@ -1,6 +1,7 @@
 {
   "name": "hansaria",
   "private": true,
+  "homepage": "farm.hansariafood.com",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
