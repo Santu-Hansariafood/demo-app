@@ -10,7 +10,7 @@ import EmployeeRegister from "./components/Employee/EmployeeRegister/EmployeeReg
 import EmployeeList from "./components/Employee/EmployeeList/EmployeeList";
 import RegisterPhoto from "./components/Register/RegisterPhoto/RegisterPhoto";
 import RegisterList from "./components/Register/RegisterData/RegisterList";
-// import UploadAadher from "./components/Register/RegisterPhoto/UploadAadher/UploadAadher";
+import DisplayFermerDetails from "./components/Register/DisplayFermerDetails/DisplayFermerDetails"
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
           <Route path="EmployeeList" element={<EmployeeList />} />
           <Route path="RegisterPhoto" element={<RegisterPhoto />} />
           <Route path="RegisterList" element={<RegisterList />} />
-          {/* <Route path="UploadAadher" element={<UploadAadher/>}/> */}
+          <Route path="DisplayFermerDetails" element={<DisplayFermerDetails />} />
         </Routes>
       </BrowserRouter>
     </>

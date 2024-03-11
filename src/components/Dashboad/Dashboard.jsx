@@ -7,7 +7,7 @@ const Dashboard = () => {
     <div className="flex flex-col lg:flex-row">
       <div className="bg-green-800 text-white lg:h-screen lg:w-64">
         <div className="p-4">
-          <h2 className="text-2xl font-bold">Sidebar</h2>
+          <h2 className="text-2xl font-bold">Admin</h2>
           <ul className="mt-4">
             <li className="py-2">
               <Link to="/EmployeeLogin" className="block hover:text-green-400">
@@ -35,6 +35,14 @@ const Dashboard = () => {
                 className="block hover:text-green-400"
               >
                 Farmer Document
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link
+                to="/DisplayFermerDetails"
+                className="block hover:text-green-400"
+              >
+                Display Details
               </Link>
             </li>
             <li className="py-2">
