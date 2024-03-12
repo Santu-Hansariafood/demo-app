@@ -58,6 +58,38 @@ const Dashboard = () => {
                 Employee Register
               </Link>
             </li>
+            <li className="py-2">
+              <Link
+                to="/RegisterStore"
+                className="block hover:text-green-400"
+              >
+                Register Store
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link
+                to="/StoreDetails"
+                className="block hover:text-green-400"
+              >
+                Store Details
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link
+                to="/UpdateSore"
+                className="block hover:text-green-400"
+              >
+                Update Store
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link
+                to="/DeleteStore"
+                className="block hover:text-green-400"
+              >
+                Delete Store
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

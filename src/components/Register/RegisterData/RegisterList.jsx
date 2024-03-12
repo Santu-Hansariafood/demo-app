@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { FaRegEye } from "react-icons/fa";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const RegisterList = () => {
-  const [employees, setEmployees] = useState([]);
+  const [farmers, setFarmers] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -10,7 +12,7 @@ const RegisterList = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:3000/register");
-        setEmployees(response.data);
+        setFarmers(response.data);
         setSuccessMessage("Live");
       } catch (error) {
         setErrorMessage("Error fetching data.");
@@ -26,7 +28,7 @@ const RegisterList = () => {
   return (
     <div className="container mx-auto mt-8">
       <h2 className="text-2xl font-bold mb-4 text-center text-green-600">
-        Employee List
+        Register Farmer List
       </h2>
       {successMessage && <p className="text-green-500">{successMessage}</p>}
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
@@ -35,24 +37,28 @@ const RegisterList = () => {
           <thead>
             <tr className="bg-green-500">
               <th className="px-4 py-2 text-white">Full Name</th>
-              {/* <th className="px-4 py-2 text-white">Last Name</th> */}
               <th className="px-4 py-2 text-white">Mobile Number</th>
               <th className="px-4 py-2 text-white">Adhar Number</th>
               <th className="px-4 py-2 text-white">Village</th>
               <th className="px-4 py-2 text-white">District</th>
               <th className="px-4 py-2 text-white">PIN CODE</th>
+              <th className="px-4 py-2 text-white">Action</th>
             </tr>
           </thead>
           <tbody>
-            {employees.map((employee, index) => (
+            {farmers.map((farmer, index) => (
               <tr key={index} className={index % 2 === 0 ? "bg-green-100" : ""}>
-                <td className="border px-4 py-2">{employee.firstName}{" "}{employee.lastName}</td>
-                {/* <td className="border px-4 py-2">{employee.lastName}</td> */}
-                <td className="border px-4 py-2">{employee.mobile}</td>
-                <td className="border px-4 py-2">{employee.adharNumber}</td>
-                <td className="border px-4 py-2">{employee.village}</td>
-                <td className="border px-4 py-2">{employee.district}</td>
-                <td className="border px-4 py-2">{employee.pinCode}</td>
+                <td className="border px-4 py-2">{farmer.firstName} {farmer.lastName}</td>
+                <td className="border px-4 py-2">{farmer.mobile}</td>
+                <td className="border px-4 py-2">{farmer.adharNumber}</td>
+                <td className="border px-4 py-2">{farmer.village}</td>
+                <td className="border px-4 py-2">{farmer.district}</td>
+                <td className="border px-4 py-2">{farmer.pinCode}</td>
+                <td className="border px-4 py-2">
+                  <Link to={{ pathname: `/farmer/${farmer._id}`, state: { farmer } }}>
+                    <FaRegEye style={{ cursor: "pointer" }} />
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>

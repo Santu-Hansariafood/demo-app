@@ -11,6 +11,11 @@ import EmployeeList from "./components/Employee/EmployeeList/EmployeeList";
 import RegisterPhoto from "./components/Register/RegisterPhoto/RegisterPhoto";
 import RegisterList from "./components/Register/RegisterData/RegisterList";
 import DisplayFermerDetails from "./components/Register/DisplayFermerDetails/DisplayFermerDetails"
+import RegisterStore from "./components/Store/RegisterStore/RegisterStore";
+import StoreDetails from "./components/Store/StoreDetails/StoreDetails";
+import UpdateStore from "./components/Store/UpdateStore/UpdateStore";
+import DeleteStore from "./components/Store/DeleteStore/DeleteStore";
+import FinalPdfDetails from "./components/Register/FinalPdfDetails/FinalPdfDetails";
 
 function App() {
   return (
@@ -18,16 +23,21 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<Dashboard />} />
-          <Route path="login" element={<Login />} />
-          <Route path="EmployeeLogin" element={<EmployeeLogin />} />
-          <Route path="AdminLogin" element={<AdminLogin />} />
-          <Route path="Register" element={<Register />} />
-          <Route path="Dashboard" element={<Dashboard />} />
-          <Route path="EmployeeRegister" element={<EmployeeRegister />} />
-          <Route path="EmployeeList" element={<EmployeeList />} />
-          <Route path="RegisterPhoto" element={<RegisterPhoto />} />
-          <Route path="RegisterList" element={<RegisterList />} />
-          <Route path="DisplayFermerDetails" element={<DisplayFermerDetails />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/EmployeeLogin" element={<EmployeeLogin />} />
+          <Route path="/AdminLogin" element={<AdminLogin />} />
+          <Route path="/Register" element={<Register />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/EmployeeRegister" element={<EmployeeRegister />} />
+          <Route path="/EmployeeList" element={<EmployeeList />} />
+          <Route path="/RegisterPhoto" element={<RegisterPhoto />} />
+          <Route path="/RegisterList" element={<RegisterList />} />
+          <Route path="/DisplayFermerDetails" element={<DisplayFermerDetails />} />
+          <Route path="/RegisterStore" element={<RegisterStore/>}/>
+          <Route path="/StoreDetails" element={<StoreDetails/>}/>
+          <Route path="/UpdateStore" element={<UpdateStore/>}/>
+          <Route path="/DeleteStore" element={<DeleteStore/>}/>
+          <Route path="farmer/:id" element={<FinalPdfDetails/>}/>
         </Routes>
       </BrowserRouter>
     </>
