@@ -26,7 +26,7 @@ const Register = () => {
     panCard:"",
     gstCard:"",
     passCard:"",
-    // profile:""
+    
   });
 
   const handleInputChange = (event) => {
@@ -42,9 +42,7 @@ const Register = () => {
     setFormData({ ...formData, [name]: files[0] });
   };
 
-  // const handleUploadButtonClick = (fieldName) => {
-  //   console.log(`Uploading ${fieldName} file...`);
-  // };
+  
 
   const handleUploadButtonClick = async (fieldName) => {
     try {
@@ -76,6 +74,11 @@ const Register = () => {
     setBank(event.target.value);
     setFormData({ ...formData, bank: event.target.value });
   };
+  const validateEmail = (email) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  };
+  
 
   const validateMobile = (mobile) => {
     const mobilePattern = /^\d{10}$/;
@@ -94,6 +97,11 @@ const Register = () => {
         formData
       );
       console.log("Registration successful!");
+      if (!validateEmail(formData.email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+  
       setFormData({
         firstName: "",
         lastName: "",
@@ -117,7 +125,7 @@ const Register = () => {
         panCard:"",
         gstCard:"",
         passCard:"",
-        // profile:""
+        
       });
     } catch (error) {
       console.error("Error registering user:", error);
@@ -128,7 +136,7 @@ const Register = () => {
     <div className="container mx-auto flex justify-center">
       <div className="w-full bg-white shadow-md rounded-lg overflow-hidden">
         <div className="py-4 px-6">
-          <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
+          <h2 className="text-2xl font-bold mb-4 text-center text-green-500">Farmer Register</h2>
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -156,9 +164,6 @@ const Register = () => {
                   type="text"
                   id="lastName"
                   name="lastName"
-                  // minLength={2}
-                  // maxLength={30}
-                  // pattern="[0-9]+"
                   value={formData.lastName}
                   onChange={handleInputChange}
                   autoComplete="off"
@@ -174,6 +179,9 @@ const Register = () => {
                   id="mobile"
                   name="mobile"
                   value={formData.mobile}
+                  minLength={10}
+                  maxLength={10}
+                  pattern="[0-10]+"
                   onChange={handleInputChange}
                   autoComplete="off"
                   className="w-full px-4 py-2 border rounded-md text-green-500"
@@ -205,9 +213,9 @@ const Register = () => {
                   id="adharNumber"
                   name="adharNumber"
                   autoComplete="off"
-                  // minLength={12}
-                  // maxLength={12}
-                  // pattern="[0-12]+"
+                  minLength={12}
+                  maxLength={12}
+                  pattern="[0-12]+"
                   value={formData.adharNumber}
                   onChange={handleInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
@@ -226,9 +234,9 @@ const Register = () => {
                   name="panCardNumber"
                   value={formData.panCardNumber}
                   onChange={handleInputChange}
-                  // minLength={10}
-                  // maxLength={10}
-                  // pattern="[0-9]+"
+                  minLength={10}
+                  maxLength={10}
+                  pattern="[0-10]+"
                   autoComplete="off"
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
@@ -249,7 +257,7 @@ const Register = () => {
                   onChange={handleFileInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
-                {formData.adharCard && (
+                {/* {formData.adharCard && (
             <img
               src={URL.createObjectURL(formData.adharCard)}
               alt="Adhar Card Preview"
@@ -261,7 +269,7 @@ const Register = () => {
             onClick={() => handleUploadButtonClick('adharCard')}
           >
             Upload
-          </button>
+          </button> */}
   
               </div>
               
@@ -290,9 +298,9 @@ const Register = () => {
                   id="gstNumber"
                   name="gstNumber"
                   autoComplete="off"
-                  // minLength={15}
-                  // maxLength={15}
-                  // pattern="[0-15]+"
+                  minLength={15}
+                  maxLength={15}
+                  pattern="[0-15]+"
                   value={formData.gstNumber}
                   onChange={handleInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
@@ -364,6 +372,9 @@ const Register = () => {
                   id="ifsc"
                   name="ifsc"
                   autoComplete="off"
+                  minLength={11}
+                  maxLength={11}
+                  pattern="[0-11]+"
                   value={formData.ifsc}
                   onChange={handleInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
@@ -465,7 +476,9 @@ const Register = () => {
                   type="text"
                   id="pinCode"
                   name="pinCode"
-                  maxLength="6"
+                  minLength={6}
+                  maxLength={6}
+                  pattern="[0-6]+"
                   value={formData.pinCode}
                   onChange={handleInputChange}
                   autoComplete="off"
