@@ -101,7 +101,7 @@ const FinalPdfDetails = () => {
           </div>
           <div className="mb-2">
             <p className="font-semibold text-green-500">Farmer Deals in:</p>
-            <p>{farmer.pinCode}</p>
+            <p>{farmer.farmerDeals}</p>
           </div>
           <div className="mb-2"></div>
 

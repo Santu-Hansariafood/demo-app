@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const UpdateStore = () => {
   const { id } = useParams();
-  const history = useHistory();
+  // const history = useHistory();
   const [storeDetails, setStoreDetails] = useState({
     storeName: "",
     storeLocation: "",
@@ -56,7 +56,7 @@ const UpdateStore = () => {
         setMessage("Store details updated successfully.");
         // Display alert and redirect after clicking OK
         window.alert(message);
-        history.push("/FinalStoreDetails");
+        // history.push("/FinalStoreDetails");
       } else {
         throw new Error("Failed to update store details");
       }

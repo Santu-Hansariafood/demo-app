@@ -1,10 +1,152 @@
-import React, { useState } from "react";
-import DropdownComponent from "./DropdownComponent/DropdownComponent";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import jsonData from "../../data/country.json";
 
+const AddressDetails = ({ formData, onStateChange, handleInputChange }) => {
+  const [uniqueStates, setUniqueStates] = useState([]);
+  const [uniqueDistricts, setUniqueDistricts] = useState([]);
+  const [uniqueVillages, setUniqueVillages] = useState([]);
+  const [uniquePinCodes, setUniquePinCodes] = useState([]);
+
+  useEffect(() => {
+    const states = [
+      ...new Set(jsonData.country.map((entry) => entry.State)),
+    ].sort();
+    setUniqueStates(states);
+  }, []);
+
+  const handleStateChange = (event) => {
+    const selectedState = event.target.value;
+    onStateChange(selectedState);
+
+    const districts = [
+      ...new Set(
+        jsonData.country
+          .filter((entry) => entry.State === selectedState)
+          .map((entry) => entry.District)
+      ),
+    ].sort();
+
+    setUniqueDistricts(districts);
+  };
+
+  const handleVillageChange = (event) => {
+    const selectedVillage = event.target.value;
+    handleInputChange(event, "village");
+
+    const selectedState = formData.state;
+    const selectedDistrict = formData.district;
+
+    const filteredData = jsonData.country.filter(
+      (entry) =>
+        entry.State === selectedState &&
+        entry.District === selectedDistrict &&
+        entry.City === selectedVillage
+    );
+
+    const pinCodes = [
+      ...new Set(filteredData.map((entry) => entry.Pincode)),
+    ].sort();
+    setUniquePinCodes(pinCodes);
+  };
+
+  const handleDistrictChange = (event) => {
+    const selectedDistrict = event.target.value;
+    handleInputChange(event, "district");
+
+    const filteredData = jsonData.country.filter(
+      (entry) => entry.District === selectedDistrict
+    );
+
+    const villages = [
+      ...new Set(filteredData.map((entry) => entry.City)),
+    ].sort();
+
+    setUniqueVillages(villages);
+  };
+
+  return (
+    <div>
+      <label htmlFor="state" className="block mb-1 text-green-500">
+        State
+      </label>
+      <select
+        id="state"
+        name="state"
+        value={formData.state}
+        onChange={handleStateChange}
+        className="w-full px-4 py-2 border rounded-md text-green-500"
+      >
+        <option value="">Select State</option>
+        {uniqueStates.map((state, index) => (
+          <option key={index} value={state}>
+            {state}
+          </option>
+        ))}
+      </select>
+
+      <label htmlFor="district" className="block mb-1 text-green-500">
+        District
+      </label>
+      <select
+        id="district"
+        name="district"
+        value={formData.district}
+        onChange={(e) => {
+          handleDistrictChange(e);
+        }}
+        className="w-full px-4 py-2 border rounded-md text-green-500"
+      >
+        <option value="">Select District</option>
+        {uniqueDistricts.map((district, index) => (
+          <option key={index} value={district}>
+            {district}
+          </option>
+        ))}
+      </select>
+
+      <label htmlFor="village" className="block mb-1 text-green-500">
+        Village
+      </label>
+      <select
+        id="village"
+        name="village"
+        value={formData.village}
+        onChange={(e) => handleVillageChange(e)}
+        className="w-full px-4 py-2 border rounded-md text-green-500"
+      >
+        <option value="">Select Village</option>
+        {uniqueVillages.map((village, index) => (
+          <option key={index} value={village}>
+            {village}
+          </option>
+        ))}
+      </select>
+
+      <label htmlFor="pinCode" className="block mb-1 text-green-500">
+        Pin Code
+      </label>
+      <select
+        id="pinCode"
+        name="pinCode"
+        value={formData.pinCode}
+        onChange={(e) => handleInputChange(e, "pinCode")}
+        className="w-full px-4 py-2 border rounded-md text-green-500"
+      >
+        <option value="">Select Pin Code</option>
+        {uniquePinCodes.map((pinCode, index) => (
+          <option key={index} value={pinCode}>
+            {pinCode}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
 const Register = () => {
   const [role, setRole] = useState("");
+  const [farmerDeals, setFarmerDeals] = useState("");
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -19,6 +161,7 @@ const Register = () => {
     village: "",
     pinCode: "",
     role: "",
+    farmerDeals: "",
     account: "",
     acName: "",
     ifsc: "",
@@ -28,6 +171,7 @@ const Register = () => {
     panCard: "",
     gstCard: "",
     passCard: "",
+    farmarPhoto: "",
   });
 
   const handleInputChange = (event) => {
@@ -43,83 +187,18 @@ const Register = () => {
     setFormData({ ...formData, [name]: files[0] });
   };
 
-  const handleUploadButtonClick = async (fieldName) => {
-    try {
-      const fileInput = document.getElementById(fieldName);
-      if (fileInput.files.length === 0) {
-        console.log(`No file selected for ${fieldName}`);
-        return;
-      }
-      const file = fileInput.files[0];
-      const formData = new FormData();
-      formData.append(fieldName, file);
-      const response = await axios.post(
-        "http://localhost:3000/register",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log(
-        `File uploaded successfully for ${fieldName}:`,
-        response.data
-      );
-    } catch (error) {
-      console.error(`Error uploading file for ${fieldName}:`, error.message);
-    }
-  };
-
   const handleRoleChange = (event) => {
     setRole(event.target.value);
     setFormData({ ...formData, role: event.target.value });
   };
 
-  const handleBankChange = (event) => {
-    setBank(event.target.value);
-    setFormData({ ...formData, bank: event.target.value });
+  const handleFarmerRoleChange = (event) => {
+    setFarmerDeals(event.target.value);
+    setFormData({ ...formData, farmerDeals: event.target.value });
   };
-  const validateEmail = (email) => {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-  };
-
-  const validateMobile = (mobile) => {
-    const mobilePattern = /^\d{10}$/;
-    return mobilePattern.test(mobile);
-  };
-  // const handleStateChange = (selectedState) => {
-  //   setFormData({ ...formData, state: selectedState });
-  // };
-
-  // const handleDistrictChange = (selectedDistrict) => {
-  //   setFormData({ ...formData, district: selectedDistrict });
-  // };
-  // console.log("jsonData in DropdownComponent:", jsonData);
-
-  // const handleVillageChange = (selectedVillage) => {
-  //   setFormData({ ...formData, village: selectedVillage });
-  // };
-
-  // const handlePinCodeChange = (selectedPinCode) => {
-  //   setFormData({ ...formData, pinCode: selectedPinCode });
-  // };
 
   const handleStateChange = (selectedState) => {
     setFormData({ ...formData, state: selectedState });
-  };
-
-  const handleDistrictChange = (selectedDistrict) => {
-    setFormData({ ...formData, district: selectedDistrict });
-  };
-
-  const handleVillageChange = (selectedVillage) => {
-    setFormData({ ...formData, village: selectedVillage });
-  };
-
-  const handlePinCodeChange = (selectedPinCode) => {
-    setFormData({ ...formData, pinCode: selectedPinCode });
   };
 
   const handleSubmit = async (event) => {
@@ -153,6 +232,7 @@ const Register = () => {
         village: "",
         pinCode: "",
         role: "",
+        farmerDeals: "",
         account: "",
         acName: "",
         ifsc: "",
@@ -162,10 +242,21 @@ const Register = () => {
         panCard: "",
         gstCard: "",
         passCard: "",
+        farmarPhoto: "",
       });
     } catch (error) {
       console.error("Error registering user:", error);
     }
+  };
+
+  const validateEmail = (email) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  };
+
+  const validateMobile = (mobile) => {
+    const mobilePattern = /^\d{10}$/;
+    return mobilePattern.test(mobile);
   };
 
   return (
@@ -173,7 +264,7 @@ const Register = () => {
       <div className="w-full bg-white shadow-md rounded-lg overflow-hidden">
         <div className="py-4 px-6">
           <h2 className="text-2xl font-bold mb-4 text-center text-green-500">
-            Farmer Register
+            New Farmer Register
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -219,7 +310,7 @@ const Register = () => {
                   value={formData.mobile}
                   minLength={10}
                   maxLength={10}
-                  pattern="[0-10]+"
+                  // pattern="[0-10]+"
                   onChange={handleInputChange}
                   autoComplete="off"
                   className="w-full px-4 py-2 border rounded-md text-green-500"
@@ -253,7 +344,7 @@ const Register = () => {
                   autoComplete="off"
                   minLength={12}
                   maxLength={12}
-                  pattern="[0-12]+"
+                  // pattern="[0-12]+"
                   value={formData.adharNumber}
                   onChange={handleInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
@@ -268,13 +359,13 @@ const Register = () => {
                 </label>
                 <input
                   type="text"
-                  id="  panCardNumber"
+                  id="panCardNumber"
                   name="panCardNumber"
                   value={formData.panCardNumber}
                   onChange={handleInputChange}
                   minLength={10}
                   maxLength={10}
-                  pattern="[0-10]+"
+                  // pattern="[0-10]+"
                   autoComplete="off"
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
@@ -287,39 +378,21 @@ const Register = () => {
                   Upload Adhar card
                 </label>
                 <input
-                  // type="file"
-                  // id="picture"
-                  // name="picture"
                   type="file"
-                  lable="adherCard"
                   name="adherCard"
                   id="adherCard"
                   accept=".jpeg, .png, .jpg"
                   onChange={handleFileInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
-                {/* {formData.adharCard && (
-            <img
-              src={URL.createObjectURL(formData.adharCard)}
-              alt="Adhar Card Preview"
-              style={{ maxWidth: '200px', maxHeight: '200px' }}
-            />
-          )}
-          <button
-            type="button" className="text-white bg-green-500 p-2 rounded-sm"
-            onClick={() => handleUploadButtonClick('adharCard')}
-          >
-            Upload
-          </button> */}
               </div>
 
               <div>
-                <label htmlFor="picture" className="block mb-1 text-green-500">
+                <label htmlFor="panCard" className="block mb-1 text-green-500">
                   Upload Pan Card
                 </label>
                 <input
                   type="file"
-                  lable="panCard"
                   name="panCard"
                   id="panCard"
                   accept=".jpeg, .png, .jpg"
@@ -340,7 +413,7 @@ const Register = () => {
                   autoComplete="off"
                   minLength={15}
                   maxLength={15}
-                  pattern="[0-15]+"
+                  // pattern="[0-15]+"
                   value={formData.gstNumber}
                   onChange={handleInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
@@ -361,12 +434,11 @@ const Register = () => {
                 />
               </div>
               <div>
-                <label htmlFor="picture" className="block mb-1 text-green-500">
-                  Upload GST Cirtificate
+                <label htmlFor="gstCard" className="block mb-1 text-green-500">
+                  Upload GST Certificate
                 </label>
                 <input
                   type="file"
-                  lable="gstCard"
                   name="gstCard"
                   id="gstCard"
                   accept=".jpeg, .png, .jpg"
@@ -374,12 +446,11 @@ const Register = () => {
                 />
               </div>
               <div>
-                <label htmlFor="picture" className="block mb-1 text-green-500">
+                <label htmlFor="passCard" className="block mb-1 text-green-500">
                   Upload Your Passbook/checkbook
                 </label>
                 <input
                   type="file"
-                  lable="passCard"
                   name="passCard"
                   id="passCard"
                   accept=".jpeg, .png, .jpg"
@@ -387,10 +458,7 @@ const Register = () => {
                 />
               </div>
               <div>
-                <label
-                  htmlFor="accountHolderName"
-                  className="block mb-1 text-green-500"
-                >
+                <label htmlFor="acName" className="block mb-1 text-green-500">
                   Account Holder Name
                 </label>
                 <input
@@ -414,7 +482,7 @@ const Register = () => {
                   autoComplete="off"
                   minLength={11}
                   maxLength={11}
-                  pattern="[0-11]+"
+                  // pattern="[0-11]+"
                   value={formData.ifsc}
                   onChange={handleInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
@@ -466,130 +534,14 @@ const Register = () => {
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
               </div>
-              {/* <div>
-                <label htmlFor="state" className="block mb-1 text-green-500">
-                  State
-                </label>
-                <input
-                  type="text"
-                  id="state"
-                  name="state"
-                  autoComplete="off"
-                  value={formData.state}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border rounded-md text-green-500"
+              <div>
+                <AddressDetails
+                  formData={formData}
+                  onStateChange={handleStateChange}
+                  handleInputChange={handleInputChange}
                 />
               </div>
-              <div>
-                <label htmlFor="district" className="block mb-1 text-green-500">
-                  District
-                </label>
-                <input
-                  type="text"
-                  id="district"
-                  name="district"
-                  value={formData.district}
-                  onChange={handleInputChange}
-                  autoComplete="off"
-                  className="w-full px-4 py-2 border rounded-md text-green-500"
-                />
-              </div>
-              <div>
-                <label htmlFor="village" className="block mb-1 text-green-500">
-                  Village
-                </label>
-                <input
-                  type="text"
-                  id="village"
-                  name="village"
-                  autoComplete="off"
-                  value={formData.village}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border rounded-md text-green-500"
-                />
-              </div>
-              <div>
-                <label htmlFor="pinCode" className="block mb-1 text-green-500">
-                  Pin Code
-                </label>
-                <input
-                  type="text"
-                  id="pinCode"
-                  name="pinCode"
-                  minLength={6}
-                  maxLength={6}
-                  pattern="[0-6]+"
-                  value={formData.pinCode}
-                  onChange={handleInputChange}
-                  autoComplete="off"
-                  className="w-full px-4 py-2 border rounded-md text-green-500"
-                />
-              </div> */}
 
-              {/* <div>
-                <label htmlFor="state" className="block mb-1 text-green-500">
-                  State
-                </label>
-                <DropdownComponent
-                  jsonData={jsonData}
-                  onSelect={(value) => handleDropdownChange("state", value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="district" className="block mb-1 text-green-500">
-                  District
-                </label>
-                <DropdownComponent
-                  jsonData={jsonData}
-                  onSelect={(value) => handleDropdownChange("district", value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="village" className="block mb-1 text-green-500">
-                  Village
-                </label>
-                <DropdownComponent
-                  jsonData={jsonData}
-                  onSelect={(value) => handleDropdownChange("village", value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="pinCode" className="block mb-1 text-green-500">
-                  Pin Code
-                </label>
-                <DropdownComponent
-                  jsonData={jsonData}
-                  onSelect={(value) => handleDropdownChange("pinCode", value)}
-                />
-              </div> */}
-<div>
-<DropdownComponent 
-label="State" 
-jsonData={jsonData} 
-onSelect={handleStateChange} />
-
-</div>
-<div>
-  <DropdownComponent
-    label="District"
-    jsonData={jsonData}
-    onSelect={handleDistrictChange}
-  />
-</div>
-<div>
-  <DropdownComponent
-    label="Village"
-    jsonData={jsonData}
-    onSelect={handleVillageChange}
-  />
-</div>
-<div>
-  <DropdownComponent
-    label="Pin Code"
-    jsonData={jsonData}
-    onSelect={handlePinCodeChange}
-  />
-</div>
               <div>
                 <label className="block mb-1 text-green-500">Role</label>
                 <select
@@ -604,13 +556,38 @@ onSelect={handleStateChange} />
                 </select>
               </div>
 
-              {/* testing the dropdown */}
+              <div>
+                <label className="block mb-1 text-green-500">
+                  Farmer Deals in{" "}
+                </label>
+                <select
+                  value={farmerDeals}
+                  onChange={handleFarmerRoleChange}
+                  className="w-full px-4 py-2 border rounded-md text-green-500"
+                >
+                  <option value="">Select Crop</option>
+                  <option value="maize">Maize</option>
+                  <option value="soyabean">Soyabean</option>
+                  <option value="rice">Rice</option>
+                  <option value="wheat">Wheat</option>
+                </select>
+              </div>
 
-              {/* <div className="container mx-auto p-4">
-      <DropdownComponent jsonData={jsonData} />
-    </div> */}
-
-              {/* end of testing */}
+              <div>
+                <label
+                  htmlFor="farmarPhoto"
+                  className="block mb-1 text-green-500"
+                >
+                  Farmer Photo
+                </label>
+                <input
+                  type="file"
+                  name="farmarPhoto"
+                  id="farmarPhoto"
+                  accept=".jpeg, .png, .jpg"
+                  className="w-full px-4 py-2 border rounded-md text-green-500"
+                />
+              </div>
 
               <div className="flex justify-center pt-6">
                 <div className="w-full max-w-xs">
@@ -618,7 +595,7 @@ onSelect={handleStateChange} />
                     type="submit"
                     className="bg-green-500 text-white px-4 py-2 rounded-md w-full"
                   >
-                    Register
+                    Register for Farmer
                   </button>
                 </div>
               </div>
