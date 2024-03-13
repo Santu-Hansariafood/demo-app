@@ -7,9 +7,22 @@ const DisplayFarmerDetails = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // const fetchPhotos = async () => {
+    //   try {
+    //     const response = await axios.get("http://localhost:3000/registerPhoto");
+    //     setPhotos(response.data);
+    //   } catch (error) {
+    //     console.error("Error fetching photos:", error);
+    //     setError("Error fetching photos. Please try again later.");
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
+
     const fetchPhotos = async () => {
       try {
         const response = await axios.get("http://localhost:3000/registerPhoto");
+        console.log(response.data); // Log the response
         setPhotos(response.data);
       } catch (error) {
         console.error("Error fetching photos:", error);
@@ -41,7 +54,7 @@ const DisplayFarmerDetails = () => {
             {Object.entries(photos).map(([key, value]) => (
               <div key={key} className="relative w-full">
                 <img
-                  src={`http://localhost:3000/uploads/${value}`}
+                  src={`http://localhost:3000/uploads/${value.image}`}
                   alt={key}
                   className="mt-2 w-full h-full object-cover transition duration-300 ease-in-out transform hover:scale-110"
                   style={{ width: "330px", height: "330px" }}

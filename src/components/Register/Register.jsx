@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import DropdownComponent from "./DropdownComponent/DropdownComponent";
 import axios from "axios";
+import jsonData from "../../data/country.json";
 
 const Register = () => {
   const [role, setRole] = useState("");
@@ -22,11 +24,10 @@ const Register = () => {
     ifsc: "",
     branchName: "",
     bankName: "",
-    adharCard:"",
-    panCard:"",
-    gstCard:"",
-    passCard:"",
-    
+    adharCard: "",
+    panCard: "",
+    gstCard: "",
+    passCard: "",
   });
 
   const handleInputChange = (event) => {
@@ -42,8 +43,6 @@ const Register = () => {
     setFormData({ ...formData, [name]: files[0] });
   };
 
-  
-
   const handleUploadButtonClick = async (fieldName) => {
     try {
       const fileInput = document.getElementById(fieldName);
@@ -54,17 +53,24 @@ const Register = () => {
       const file = fileInput.files[0];
       const formData = new FormData();
       formData.append(fieldName, file);
-      const response = await axios.post('http://localhost:3000/register', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      console.log(`File uploaded successfully for ${fieldName}:`, response.data);
+      const response = await axios.post(
+        "http://localhost:3000/register",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(
+        `File uploaded successfully for ${fieldName}:`,
+        response.data
+      );
     } catch (error) {
       console.error(`Error uploading file for ${fieldName}:`, error.message);
     }
   };
-  
+
   const handleRoleChange = (event) => {
     setRole(event.target.value);
     setFormData({ ...formData, role: event.target.value });
@@ -78,11 +84,42 @@ const Register = () => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
   };
-  
 
   const validateMobile = (mobile) => {
     const mobilePattern = /^\d{10}$/;
     return mobilePattern.test(mobile);
+  };
+  // const handleStateChange = (selectedState) => {
+  //   setFormData({ ...formData, state: selectedState });
+  // };
+
+  // const handleDistrictChange = (selectedDistrict) => {
+  //   setFormData({ ...formData, district: selectedDistrict });
+  // };
+  // console.log("jsonData in DropdownComponent:", jsonData);
+
+  // const handleVillageChange = (selectedVillage) => {
+  //   setFormData({ ...formData, village: selectedVillage });
+  // };
+
+  // const handlePinCodeChange = (selectedPinCode) => {
+  //   setFormData({ ...formData, pinCode: selectedPinCode });
+  // };
+
+  const handleStateChange = (selectedState) => {
+    setFormData({ ...formData, state: selectedState });
+  };
+
+  const handleDistrictChange = (selectedDistrict) => {
+    setFormData({ ...formData, district: selectedDistrict });
+  };
+
+  const handleVillageChange = (selectedVillage) => {
+    setFormData({ ...formData, village: selectedVillage });
+  };
+
+  const handlePinCodeChange = (selectedPinCode) => {
+    setFormData({ ...formData, pinCode: selectedPinCode });
   };
 
   const handleSubmit = async (event) => {
@@ -101,7 +138,7 @@ const Register = () => {
         alert("Please enter a valid email address.");
         return;
       }
-  
+
       setFormData({
         firstName: "",
         lastName: "",
@@ -121,11 +158,10 @@ const Register = () => {
         ifsc: "",
         branchName: "",
         bankName: "",
-        adharCard:"",
-        panCard:"",
-        gstCard:"",
-        passCard:"",
-        
+        adharCard: "",
+        panCard: "",
+        gstCard: "",
+        passCard: "",
       });
     } catch (error) {
       console.error("Error registering user:", error);
@@ -136,7 +172,9 @@ const Register = () => {
     <div className="container mx-auto flex justify-center">
       <div className="w-full bg-white shadow-md rounded-lg overflow-hidden">
         <div className="py-4 px-6">
-          <h2 className="text-2xl font-bold mb-4 text-center text-green-500">Farmer Register</h2>
+          <h2 className="text-2xl font-bold mb-4 text-center text-green-500">
+            Farmer Register
+          </h2>
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -242,7 +280,10 @@ const Register = () => {
                 />
               </div>
               <div>
-                <label htmlFor="adherCard" className="block mb-1 text-green-500">
+                <label
+                  htmlFor="adherCard"
+                  className="block mb-1 text-green-500"
+                >
                   Upload Adhar card
                 </label>
                 <input
@@ -252,8 +293,8 @@ const Register = () => {
                   type="file"
                   lable="adherCard"
                   name="adherCard"
-                  id='adherCard'
-                  accept='.jpeg, .png, .jpg'
+                  id="adherCard"
+                  accept=".jpeg, .png, .jpg"
                   onChange={handleFileInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
@@ -270,9 +311,8 @@ const Register = () => {
           >
             Upload
           </button> */}
-  
               </div>
-              
+
               <div>
                 <label htmlFor="picture" className="block mb-1 text-green-500">
                   Upload Pan Card
@@ -281,8 +321,8 @@ const Register = () => {
                   type="file"
                   lable="panCard"
                   name="panCard"
-                  id='panCard'
-                  accept='.jpeg, .png, .jpg'
+                  id="panCard"
+                  accept=".jpeg, .png, .jpg"
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
               </div>
@@ -328,8 +368,8 @@ const Register = () => {
                   type="file"
                   lable="gstCard"
                   name="gstCard"
-                  id='gstCard'
-                  accept='.jpeg, .png, .jpg'
+                  id="gstCard"
+                  accept=".jpeg, .png, .jpg"
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
               </div>
@@ -341,8 +381,8 @@ const Register = () => {
                   type="file"
                   lable="passCard"
                   name="passCard"
-                  id='passCard'
-                  accept='.jpeg, .png, .jpg'
+                  id="passCard"
+                  accept=".jpeg, .png, .jpg"
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
               </div>
@@ -426,7 +466,7 @@ const Register = () => {
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
               </div>
-              <div>
+              {/* <div>
                 <label htmlFor="state" className="block mb-1 text-green-500">
                   State
                 </label>
@@ -484,7 +524,72 @@ const Register = () => {
                   autoComplete="off"
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
+              </div> */}
+
+              {/* <div>
+                <label htmlFor="state" className="block mb-1 text-green-500">
+                  State
+                </label>
+                <DropdownComponent
+                  jsonData={jsonData}
+                  onSelect={(value) => handleDropdownChange("state", value)}
+                />
               </div>
+              <div>
+                <label htmlFor="district" className="block mb-1 text-green-500">
+                  District
+                </label>
+                <DropdownComponent
+                  jsonData={jsonData}
+                  onSelect={(value) => handleDropdownChange("district", value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="village" className="block mb-1 text-green-500">
+                  Village
+                </label>
+                <DropdownComponent
+                  jsonData={jsonData}
+                  onSelect={(value) => handleDropdownChange("village", value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="pinCode" className="block mb-1 text-green-500">
+                  Pin Code
+                </label>
+                <DropdownComponent
+                  jsonData={jsonData}
+                  onSelect={(value) => handleDropdownChange("pinCode", value)}
+                />
+              </div> */}
+<div>
+<DropdownComponent 
+label="State" 
+jsonData={jsonData} 
+onSelect={handleStateChange} />
+
+</div>
+<div>
+  <DropdownComponent
+    label="District"
+    jsonData={jsonData}
+    onSelect={handleDistrictChange}
+  />
+</div>
+<div>
+  <DropdownComponent
+    label="Village"
+    jsonData={jsonData}
+    onSelect={handleVillageChange}
+  />
+</div>
+<div>
+  <DropdownComponent
+    label="Pin Code"
+    jsonData={jsonData}
+    onSelect={handlePinCodeChange}
+  />
+</div>
               <div>
                 <label className="block mb-1 text-green-500">Role</label>
                 <select
@@ -498,6 +603,14 @@ const Register = () => {
                   <option value="farmer">Farmer</option>
                 </select>
               </div>
+
+              {/* testing the dropdown */}
+
+              {/* <div className="container mx-auto p-4">
+      <DropdownComponent jsonData={jsonData} />
+    </div> */}
+
+              {/* end of testing */}
 
               <div className="flex justify-center pt-6">
                 <div className="w-full max-w-xs">
