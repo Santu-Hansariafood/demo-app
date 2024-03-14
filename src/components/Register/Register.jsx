@@ -181,10 +181,12 @@ const Register = () => {
       [name]: value,
     });
   };
+  
 
   const handleFileInputChange = (event) => {
     const { name, files } = event.target;
-    setFormData({ ...formData, [name]: files[0] });
+    const file = files && files.length > 0 ? files[0] : null;
+    setFormData({ ...formData, [name]: file });
   };
 
   const handleRoleChange = (event) => {
@@ -201,51 +203,87 @@ const Register = () => {
     setFormData({ ...formData, state: selectedState });
   };
 
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     if (!validateMobile(formData.mobile)) {
+  //       alert("Please enter a valid mobile number.");
+  //       return;
+  //     }
+  //     const response = await axios.post(
+  //       "http://localhost:3000/register",
+  //       formData
+  //     );
+      
+  //     console.log("Registration successful!");
+  //     if (!validateEmail(formData.email)) {
+  //       alert("Please enter a valid email address.");
+  //       return;
+  //     }
+
+  //     setFormData({
+  //       firstName: "",
+  //       lastName: "",
+  //       mobile: "",
+  //       email: "",
+  //       adharNumber: "",
+  //       panCardNumber: "",
+  //       gstNumber: "",
+  //       address: "",
+  //       state: "",
+  //       district: "",
+  //       village: "",
+  //       pinCode: "",
+  //       role: "",
+  //       farmerDeals: "",
+  //       account: "",
+  //       acName: "",
+  //       ifsc: "",
+  //       branchName: "",
+  //       bankName: "",
+  //       adharCard: "",
+  //       panCard: "",
+  //       gstCard: "",
+  //       passCard: "",
+  //       farmarPhoto: "",
+  //     });
+  //   } catch (error) {
+  //     console.error("Error registering user:", error);
+  //   }
+  // };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      if (!validateMobile(formData.mobile)) {
-        alert("Please enter a valid mobile number.");
-        return;
-      }
+      // Your existing form validation logic
+
+      const formDataToSend = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        if (key === 'adharCard' || key === 'panCard' || key === 'gstCard' || key === 'passCard' || key === 'farmarPhoto') {
+          formDataToSend.append(key, value);
+        } else {
+          formDataToSend.set(key, value);
+        }
+      });
+
       const response = await axios.post(
         "http://localhost:3000/register",
-        formData
+        formDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
-      console.log("Registration successful!");
-      if (!validateEmail(formData.email)) {
-        alert("Please enter a valid email address.");
-        return;
-      }
 
-      setFormData({
-        firstName: "",
-        lastName: "",
-        mobile: "",
-        email: "",
-        adharNumber: "",
-        panCardNumber: "",
-        gstNumber: "",
-        address: "",
-        state: "",
-        district: "",
-        village: "",
-        pinCode: "",
-        role: "",
-        farmerDeals: "",
-        account: "",
-        acName: "",
-        ifsc: "",
-        branchName: "",
-        bankName: "",
-        adharCard: "",
-        panCard: "",
-        gstCard: "",
-        passCard: "",
-        farmarPhoto: "",
-      });
+      console.log("Registration successful!");
+
+      // Reset form data after successful submission
+      setFormData({ ...initialFormData });
     } catch (error) {
       console.error("Error registering user:", error);
+      // Display error message to the user
+      // Optionally, you can clear the form data here
     }
   };
 
@@ -266,7 +304,7 @@ const Register = () => {
           <h2 className="text-2xl font-bold mb-4 text-center text-green-500">
             New Farmer Register
           </h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} encType="multipart/form-data">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label
@@ -372,15 +410,16 @@ const Register = () => {
               </div>
               <div>
                 <label
-                  htmlFor="adherCard"
+                  htmlFor="adharCard"
                   className="block mb-1 text-green-500"
                 >
                   Upload Adhar card
                 </label>
+                
                 <input
                   type="file"
-                  name="adherCard"
-                  id="adherCard"
+                  name="adharCard"
+                  id="adharCard"
                   accept=".jpeg, .png, .jpg"
                   onChange={handleFileInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
@@ -391,11 +430,13 @@ const Register = () => {
                 <label htmlFor="panCard" className="block mb-1 text-green-500">
                   Upload Pan Card
                 </label>
+
                 <input
                   type="file"
                   name="panCard"
                   id="panCard"
                   accept=".jpeg, .png, .jpg"
+                  onChange={handleFileInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
               </div>
@@ -442,6 +483,7 @@ const Register = () => {
                   name="gstCard"
                   id="gstCard"
                   accept=".jpeg, .png, .jpg"
+                  onChange={handleFileInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
               </div>
@@ -454,6 +496,7 @@ const Register = () => {
                   name="passCard"
                   id="passCard"
                   accept=".jpeg, .png, .jpg"
+                  onChange={handleFileInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
               </div>
@@ -585,6 +628,7 @@ const Register = () => {
                   name="farmarPhoto"
                   id="farmarPhoto"
                   accept=".jpeg, .png, .jpg"
+                  onChange={handleFileInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
               </div>

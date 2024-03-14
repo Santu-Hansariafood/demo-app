@@ -26,7 +26,7 @@ const EmployeeLogin = () => {
     }
 
     axios
-      .get("http://localhost:3000/employeeRegister")
+      .get("https://hansaria-server.onrender.com/employeeRegister")
       .then((result) => {
         result.data.map((user) => {
           if (user.mobile === formData.mobile) {

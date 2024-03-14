@@ -10,7 +10,7 @@ const EmployeeList = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/employeeRegister"
+          "https://hansaria-server.onrender.com/employeeRegister"
         );
         setEmployees(response.data);
         setSuccessMessage("Live");

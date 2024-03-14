@@ -17,6 +17,7 @@ import UpdateStore from "./components/Store/UpdateStore/UpdateStore";
 import DeleteStore from "./components/Store/DeleteStore/DeleteStore";
 import FinalPdfDetails from "./components/Register/FinalPdfDetails/FinalPdfDetails";
 import FinalStoreDetails from "./components/Store/FinalStoreDetails/FinalStoreDetails"
+import RegisterDetails from "./components/Register/RegisterDetails/RegisterDetails";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/farmer/:id" element={<FinalPdfDetails/>}/>
           <Route path="/store/:id" element={<FinalStoreDetails/>}/>
           <Route path="UpdateStore/:id" element={<UpdateStore/>}/>
+          <Route path="RegisterDetails/:id" element={<RegisterDetails/>}/>
         </Routes>
       </BrowserRouter>
     </>

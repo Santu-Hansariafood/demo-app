@@ -48,7 +48,7 @@ const EmployeeRegister = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:3000/employeeRegister",
+        "https://hansaria-server.onrender.com/employeeRegister",
         formData
       );
       console.log("Form submitted successfully:", response.data);

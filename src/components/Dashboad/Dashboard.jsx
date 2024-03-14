@@ -30,10 +30,7 @@ const Dashboard = () => {
               </Link>
             </li>
             <li className="py-2">
-              <Link
-                to="/RegisterPhoto"
-                className="block hover:text-green-400"
-              >
+              <Link to="/RegisterPhoto" className="block hover:text-green-400">
                 Farmer Document
               </Link>
             </li>
@@ -59,34 +56,22 @@ const Dashboard = () => {
               </Link>
             </li>
             <li className="py-2">
-              <Link
-                to="/RegisterStore"
-                className="block hover:text-green-400"
-              >
+              <Link to="/RegisterStore" className="block hover:text-green-400">
                 Register Store
               </Link>
             </li>
             <li className="py-2">
-              <Link
-                to="/StoreDetails"
-                className="block hover:text-green-400"
-              >
+              <Link to="/StoreDetails" className="block hover:text-green-400">
                 Store Details
               </Link>
             </li>
             <li className="py-2">
-              <Link
-                to="/UpdateSore"
-                className="block hover:text-green-400"
-              >
+              <Link to="/UpdateSore" className="block hover:text-green-400">
                 Update Store
               </Link>
             </li>
             <li className="py-2">
-              <Link
-                to="/DeleteStore"
-                className="block hover:text-green-400"
-              >
+              <Link to="/DeleteStore" className="block hover:text-green-400">
                 Delete Store
               </Link>
             </li>
@@ -96,9 +81,13 @@ const Dashboard = () => {
 
       <div className="flex-1 bg-gray-200">
         <div className="p-4">
-          <h2 className="text-2xl font-bold hover:text-green-400">
-            Welcome to your dashboard!
-          </h2>
+        <div className="text-center lg:text-left">
+  <h2 className="text-2xl font-bold hover:text-green-500">
+    Welcome to your dashboard!
+  </h2>
+</div>
+
+
           <img src={dashboardImage} alt="Dashboard" className="mt-4 w-full" />
         </div>
       </div>
