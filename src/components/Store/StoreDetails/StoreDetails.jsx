@@ -9,7 +9,7 @@ const StoreDetails = () => {
   useEffect(() => {
     const fetchStoreDetails = async () => {
       try {
-        const response = await fetch("http://localhost:3000/registerStore");
+        const response = await fetch("https://hansaria-server.onrender.com/registerStore");
         if (response.ok) {
           const data = await response.json();
           setStoreDetails(data);

@@ -12,7 +12,7 @@ const FinalPdfDetails = () => {
     const fetchFarmer = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/register/${id}`
+          `https://hansaria-server.onrender.com/register/${id}`
         );
         setFarmer(response.data);
       } catch (error) {

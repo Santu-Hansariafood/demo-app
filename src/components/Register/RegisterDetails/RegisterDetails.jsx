@@ -9,7 +9,7 @@
 // //   useEffect(() => {
 // //     const fetchRegister = async () => {
 // //       try {
-// //         const response = await axios.get(`http://localhost:3000/register/${id}`); // Fetch register by ID
+// //         const response = await axios.get(`https://hansaria-server.onrender.com/register/${id}`); // Fetch register by ID
 // //         setRegister(response.data);
 // //       } catch (error) {
 // //         console.error('Error fetching data:', error);
@@ -71,7 +71,7 @@
 //   useEffect(() => {
 //     const fetchRegister = async () => {
 //       try {
-//         const response = await axios.get(`http://localhost:3000/register/${id}`); // Fetch register by ID
+//         const response = await axios.get(`https://hansaria-server.onrender.com/register/${id}`); // Fetch register by ID
 //         setRegister(response.data);
 //       } catch (error) {
 //         console.error('Error fetching data:', error);
@@ -144,7 +144,7 @@ const RegisterDetails = () => {
   useEffect(() => {
     const fetchRegister = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/register/${id}`); // Fetch register by ID
+        const response = await axios.get(`https://hansaria-server.onrender.com/register/${id}`); // Fetch register by ID
         setRegister(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);

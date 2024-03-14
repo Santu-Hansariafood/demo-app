@@ -20,7 +20,7 @@ const RegisterStore = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3000/registerstore", formData);
+      const response = await axios.post("https://hansaria-server.onrender.com/registerstore", formData);
 
       if (response.status === 200) {
         console.log("Store registered successfully!");

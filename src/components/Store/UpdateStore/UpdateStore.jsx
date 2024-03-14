@@ -18,7 +18,7 @@ const UpdateStore = () => {
   useEffect(() => {
     const fetchStoreDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/registerStore/${id}`);
+        const response = await fetch(`https://hansaria-server.onrender.com/registerStore/${id}`);
         if (response.ok) {
           const data = await response.json();
           setStoreDetails(data);
@@ -45,7 +45,7 @@ const UpdateStore = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:3000/registerStore/${id}`, {
+      const response = await fetch(`https://hansaria-server.onrender.com/registerStore/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -211,7 +211,7 @@ const Register = () => {
   //       return;
   //     }
   //     const response = await axios.post(
-  //       "http://localhost:3000/register",
+  //       "https://hansaria-server.onrender.com/register",
   //       formData
   //     );
       
@@ -267,7 +267,7 @@ const Register = () => {
       });
 
       const response = await axios.post(
-        "http://localhost:3000/register",
+        "https://hansaria-server.onrender.com/register",
         formDataToSend,
         {
           headers: {

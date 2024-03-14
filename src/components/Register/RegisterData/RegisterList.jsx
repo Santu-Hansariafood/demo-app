@@ -12,7 +12,7 @@ const RegisterList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/register");
+        const response = await axios.get("https://hansaria-server.onrender.com/register");
         setFarmers(response.data);
         setSuccessMessage("Live");
       } catch (error) {

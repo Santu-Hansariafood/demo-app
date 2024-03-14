@@ -11,7 +11,7 @@ const FinalStoreDetails = () => {
     const fetchStore = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/registerStore/${id}`
+          `https://hansaria-server.onrender.com/registerStore/${id}`
         );
         setStore(response.data);
       } catch (error) {

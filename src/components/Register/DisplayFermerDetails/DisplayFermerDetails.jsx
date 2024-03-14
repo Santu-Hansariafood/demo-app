@@ -9,7 +9,7 @@ const DisplayFarmerDetails = () => {
   useEffect(() => {
     // const fetchPhotos = async () => {
     //   try {
-    //     const response = await axios.get("http://localhost:3000/registerPhoto");
+    //     const response = await axios.get("https://hansaria-server.onrender.com/registerPhoto");
     //     setPhotos(response.data);
     //   } catch (error) {
     //     console.error("Error fetching photos:", error);
@@ -21,7 +21,7 @@ const DisplayFarmerDetails = () => {
 
     const fetchPhotos = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/registerPhoto");
+        const response = await axios.get("https://hansaria-server.onrender.com/registerPhoto");
         console.log(response.data); 
         setPhotos(response.data);
       } catch (error) {
@@ -54,7 +54,7 @@ const DisplayFarmerDetails = () => {
     //         {Object.entries(photos).map(([key, value]) => (
     //           <div key={key} className="relative w-full">
     //             <img
-    //               src={`http://localhost:3000/uploads/${value.image}`}
+    //               src={`https://hansaria-server.onrender.com/uploads/${value.image}`}
     //               alt={key}
     //               className="mt-2 w-full h-full object-cover transition duration-300 ease-in-out transform hover:scale-110"
     //               style={{ width: "330px", height: "330px" }}
@@ -75,7 +75,7 @@ const DisplayFarmerDetails = () => {
         {photos.map((photo, index) => (
           <img
             key={index}
-            src={`http://localhost:3000/registerPhoto/${photo}`}
+            src={`https://hansaria-server.onrender.com/registerPhoto/${photo}`}
             alt={`Photo ${index}`}
             style={{ maxWidth: "200px", maxHeight:"200px", margin: "10px" }}
           />
