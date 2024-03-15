@@ -30,7 +30,6 @@ const FinalStoreDetails = () => {
     return <div>Loading...</div>;
   }
 
-
   return (
     <div className="container mx-auto mt-8 relative">
       <div className="bg-white rounded-lg shadow-md p-8">
@@ -68,10 +67,8 @@ const FinalStoreDetails = () => {
           </div>
         </div>
         <div className="mb-2 flex justify-center items-center">
-            {/* QR Code component */}
-            <QRCode value={JSON.stringify(store)} />
-          </div>
-
+          <QRCode value={JSON.stringify(store)} />
+        </div>
 
         <div className="flex justify-center mt-10">
           <button
