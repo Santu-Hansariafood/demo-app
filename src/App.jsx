@@ -13,7 +13,6 @@ import DisplayFermerDetails from "./components/Register/DisplayFermerDetails/Dis
 import RegisterStore from "./components/Store/RegisterStore/RegisterStore";
 import StoreDetails from "./components/Store/StoreDetails/StoreDetails";
 import UpdateStore from "./components/Store/UpdateStore/UpdateStore";
-import DeleteStore from "./components/Store/DeleteStore/DeleteStore";
 import FinalPdfDetails from "./components/Register/FinalPdfDetails/FinalPdfDetails";
 import FinalStoreDetails from "./components/Store/FinalStoreDetails/FinalStoreDetails";
 import RegisterDetails from "./components/Register/RegisterDetails/RegisterDetails";
@@ -42,7 +41,6 @@ function App() {
           <Route path="/RegisterStore" element={<RegisterStore />} />
           <Route path="/StoreDetails" element={<StoreDetails />} />
           <Route path="/UpdateStore" element={<UpdateStore />} />
-          <Route path="/DeleteStore" element={<DeleteStore />} />
           <Route path="/farmer/:id" element={<FinalPdfDetails />} />
           <Route path="/store/:id" element={<FinalStoreDetails />} />
           <Route path="UpdateStore/:id" element={<UpdateStore />} />

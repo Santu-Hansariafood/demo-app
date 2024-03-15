@@ -20,7 +20,7 @@ const RegisterStore = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://hansaria-server.onrender.com/registerstore", formData);
+      const response = await axios.post("http://localhost:3000/registerstore", formData);
 
       if (response.status === 200) {
         console.log("Store registered successfully!");
@@ -107,7 +107,6 @@ const RegisterStore = () => {
             name="pinCode"
             maxLength={6}
             minLength={6}
-            // pattern="[0-6]+"
             value={formData.pinCode}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-md"
@@ -123,7 +122,6 @@ const RegisterStore = () => {
             onChange={handleChange}
             maxLength={10}
             minLength={10}
-            // pattern="[0-10]+"
             className="w-full px-4 py-2 border rounded-md"
             required
           />

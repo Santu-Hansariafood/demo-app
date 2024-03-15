@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 
 const UpdateStore = () => {
   const { id } = useParams();
-  // const history = useHistory();
   const [storeDetails, setStoreDetails] = useState({
     storeName: "",
     storeLocation: "",
@@ -18,7 +17,9 @@ const UpdateStore = () => {
   useEffect(() => {
     const fetchStoreDetails = async () => {
       try {
-        const response = await fetch(`https://hansaria-server.onrender.com/registerStore/${id}`);
+        const response = await fetch(
+          `http://localhost:3000/registerStore/${id}`
+        );
         if (response.ok) {
           const data = await response.json();
           setStoreDetails(data);
@@ -36,27 +37,28 @@ const UpdateStore = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setStoreDetails(prevState => ({
+    setStoreDetails((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://hansaria-server.onrender.com/registerStore/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(storeDetails), 
-      });
+      const response = await fetch(
+        `http://localhost:3000/registerStore/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(storeDetails),
+        }
+      );
       if (response.ok) {
         setMessage("Store details updated successfully.");
-        // Display alert and redirect after clicking OK
         window.alert(message);
-        // history.push("/FinalStoreDetails");
       } else {
         throw new Error("Failed to update store details");
       }
@@ -66,13 +68,19 @@ const UpdateStore = () => {
     }
   };
 
-
   return (
     <div className="container mx-auto mt-8">
-      <h2 className="text-2xl font-semibold mb-4 text-center text-green-500">Update Store Details</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-center text-green-500">
+        Update Store Details
+      </h2>
       <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
         <div className="mb-4">
-          <label htmlFor="storeName" className="block font-medium text-green-500">Store Name:</label>
+          <label
+            htmlFor="storeName"
+            className="block font-medium text-green-500"
+          >
+            Store Name:
+          </label>
           <input
             type="text"
             id="storeName"
@@ -83,7 +91,12 @@ const UpdateStore = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="storeLocation" className="block font-medium text-green-500">Store Location:</label>
+          <label
+            htmlFor="storeLocation"
+            className="block font-medium text-green-500"
+          >
+            Store Location:
+          </label>
           <input
             type="text"
             id="storeLocation"
@@ -94,7 +107,12 @@ const UpdateStore = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="storeCapacity" className="block font-medium text-green-500">Store Capacity:</label>
+          <label
+            htmlFor="storeCapacity"
+            className="block font-medium text-green-500"
+          >
+            Store Capacity:
+          </label>
           <input
             type="text"
             id="storeCapacity"
@@ -105,7 +123,12 @@ const UpdateStore = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="storeManager" className="block font-medium text-green-500">Store Manager:</label>
+          <label
+            htmlFor="storeManager"
+            className="block font-medium text-green-500"
+          >
+            Store Manager:
+          </label>
           <input
             type="text"
             id="storeManager"
@@ -116,7 +139,12 @@ const UpdateStore = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="storeAddress" className="block font-medium text-green-500">Store Address:</label>
+          <label
+            htmlFor="storeAddress"
+            className="block font-medium text-green-500"
+          >
+            Store Address:
+          </label>
           <input
             type="text"
             id="storeAddress"
@@ -127,7 +155,9 @@ const UpdateStore = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="pinCode" className="block font-medium text-green-500">PIN CODE:</label>
+          <label htmlFor="pinCode" className="block font-medium text-green-500">
+            PIN CODE:
+          </label>
           <input
             type="text"
             id="pinCode"
@@ -138,7 +168,12 @@ const UpdateStore = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="storeMobileNumber" className="block font-medium text-green-500">Store Mobile Number:</label>
+          <label
+            htmlFor="storeMobileNumber"
+            className="block font-medium text-green-500"
+          >
+            Store Mobile Number:
+          </label>
           <input
             type="text"
             id="storeMobileNumber"

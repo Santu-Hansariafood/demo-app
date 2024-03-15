@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import QRCode from "react-qr-code";
+import { RiseLoader } from "react-spinners";
 
 const FinalStoreDetails = () => {
   const { id } = useParams();
@@ -11,7 +12,7 @@ const FinalStoreDetails = () => {
     const fetchStore = async () => {
       try {
         const response = await axios.get(
-          `https://hansaria-server.onrender.com/registerStore/${id}`
+          `http://localhost:3000/registerStore/${id}`
         );
         setStore(response.data);
       } catch (error) {
@@ -26,8 +27,21 @@ const FinalStoreDetails = () => {
     window.print();
   };
 
-  if (!store) {
-    return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <div className="container mx-auto mt-8 flex justify-center items-center h-screen">
+        <div className="flex flex-col items-center">
+          <RiseLoader
+            color={"#36D7B7"}
+            height={100}
+            width={100}
+            radius={10}
+            margin={10}
+          />
+          <p className="text-green-500 font-semibold mt-4">Loading...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
