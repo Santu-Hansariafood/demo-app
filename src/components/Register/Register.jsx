@@ -348,7 +348,6 @@ const Register = () => {
                   value={formData.mobile}
                   minLength={10}
                   maxLength={10}
-                  // pattern="[0-10]+"
                   onChange={handleInputChange}
                   autoComplete="off"
                   className="w-full px-4 py-2 border rounded-md text-green-500"
@@ -382,7 +381,6 @@ const Register = () => {
                   autoComplete="off"
                   minLength={12}
                   maxLength={12}
-                  // pattern="[0-12]+"
                   value={formData.adharNumber}
                   onChange={handleInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
