@@ -12,7 +12,7 @@ const RegisterList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://hansaria-server.onrender.com/register");
+        const response = await axios.get("http://localhost:3000/register");
         setFarmers(response.data);
         setSuccessMessage("Live");
       } catch (error) {
@@ -49,22 +49,34 @@ const RegisterList = () => {
             </thead>
             <tbody>
               {farmers.map((farmer, index) => (
-                <tr key={index} className={index % 2 === 0 ? "bg-green-100" : ""}>
-                  <td className="border px-4 py-2">{farmer.firstName} {farmer.lastName}</td>
+                <tr
+                  key={index}
+                  className={index % 2 === 0 ? "bg-green-100" : ""}
+                >
+                  <td className="border px-4 py-2">
+                    {farmer.firstName} {farmer.lastName}
+                  </td>
                   <td className="border px-4 py-2">{farmer.mobile}</td>
                   <td className="border px-4 py-2">{farmer.adharNumber}</td>
                   <td className="border px-4 py-2">{farmer.village}</td>
                   <td className="border px-4 py-2">{farmer.district}</td>
                   <td className="border px-4 py-2">{farmer.pinCode}</td>
                   <td className="border px-4 py-2 flex space-x-2">
-                    <Link to={{ pathname: `/farmer/${farmer._id}`, state: { farmer } }}>
-                      <FaRegEye style={{ cursor: "pointer", color:"green" }} />
+                    <Link
+                      to={{
+                        pathname: `/RegisterDetails/${farmer._id}`,
+                        state: { farmer },
+                      }}
+                    >
+                      <FaRegEye style={{ cursor: "pointer", color: "green" }} />
                     </Link>
                     <Link to="#">
-                      <FaEdit style={{ cursor: "pointer", color:"blue" }} />
+                      <FaEdit style={{ cursor: "pointer", color: "blue" }} />
                     </Link>
                     <Link to="#">
-                      <MdDeleteForever style={{ cursor: "pointer",color:"red" }} />
+                      <MdDeleteForever
+                        style={{ cursor: "pointer", color: "red" }}
+                      />
                     </Link>
                   </td>
                 </tr>

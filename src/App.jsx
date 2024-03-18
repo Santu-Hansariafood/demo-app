@@ -43,8 +43,8 @@ function App() {
           <Route path="/UpdateStore" element={<UpdateStore />} />
           <Route path="/farmer/:id" element={<FinalPdfDetails />} />
           <Route path="/store/:id" element={<FinalStoreDetails />} />
-          <Route path="UpdateStore/:id" element={<UpdateStore />} />
-          <Route path="RegisterDetails/:id" element={<RegisterDetails />} />
+          <Route path="/UpdateStore/:id" element={<UpdateStore />} />
+          <Route path="/RegisterDetails/:id" element={<RegisterDetails />} />
         </Routes>
       </BrowserRouter>
     </>

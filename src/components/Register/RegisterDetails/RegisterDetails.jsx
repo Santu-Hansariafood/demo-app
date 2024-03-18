@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { RiseLoader } from "react-spinners";
 
 const RegisterDetails = () => {
   const { id } = useParams();
-  const history = useHistory(); // Get access to the history object
+  // const history = useHistory();
   const [register, setRegister] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -32,9 +32,9 @@ const RegisterDetails = () => {
     window.print();
   };
 
-  const handleBack = () => {
-    history.goBack(); // Navigate back using history object
-  };
+  // const handleBack = () => {
+  //   history.goBack(); 
+  // };
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -134,12 +134,12 @@ const RegisterDetails = () => {
             </>
           )}
           <div className="mt-4 flex justify-between">
-            <button
+            {/* <button
               onClick={handleBack}
               className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Back
-            </button>
+            </button> */}
             <button
               onClick={handlePrint}
               className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -166,7 +166,41 @@ const RegisterDetails = () => {
                   />
                 </div>
               )}
-              {register.panCard && (
+
+
+{register && (
+  <>
+    {register.adharCard && (
+      <div>
+        <h3>Adhar Card:</h3>
+        <img
+          className="mt-2"
+          src={register.adharCardUrl || "http://via.placeholder.com/640x360"} // Replace with default image path or URL if needed
+          alt="Adhar Card"
+          onError={(e) => console.error("Adhar Card Image loading error:", e)}
+        />
+      </div>
+    )}
+  </>
+)}
+       
+       
+       {register && (
+  <>
+    {register.adharCard && (
+      <div>
+        <h3>Adhar Card:</h3>
+        <img
+          className="mt-2"
+          src={register.adharCardUrl || register.adharCard?.data} // Check for URL or Base64 data based on your approach
+          alt="Adhar Card"
+          onError={(e) => console.error("Adhar Card Image loading error:", e)}
+        />
+      </div>
+    )}
+    {/* Similar logic for PAN Card, Passbook, GST Card, and Photo */}
+  </>
+)}       {register.panCard && (
                 <div>
                   <h3>PAN Card:</h3>
                   <img

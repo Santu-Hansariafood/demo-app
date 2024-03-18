@@ -147,6 +147,7 @@ const AddressDetails = ({ formData, onStateChange, handleInputChange }) => {
 const Register = () => {
   const [role, setRole] = useState("");
   const [farmerDeals, setFarmerDeals] = useState("");
+  const [registerBy,setRegisterBy]=useState('');
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -198,6 +199,11 @@ const Register = () => {
     setFarmerDeals(event.target.value);
     setFormData({ ...formData, farmerDeals: event.target.value });
   };
+
+  const handleRegisterByChange=(event)=>{
+    setRegisterBy(event.target.value);
+    setFormData({...formData,registerBy:event.target.value})
+  }
 
   const handleStateChange = (selectedState) => {
     setFormData({ ...formData, state: selectedState });
@@ -629,6 +635,23 @@ const Register = () => {
                   onChange={handleFileInputChange}
                   className="w-full px-4 py-2 border rounded-md text-green-500"
                 />
+              </div>
+
+              <div>
+                <label className="block mb-1 text-green-500">
+                  Register By{" "}
+                </label>
+                <select
+                  value={registerBy}
+                  onChange={handleRegisterByChange}
+                  className="w-full px-4 py-2 border rounded-md text-green-500"
+                >
+                  <option value="">Select The Register name</option>
+                  <option value="a">a</option>
+                  <option value="b">b</option>
+                  <option value="c">c</option>
+                  <option value="d">d</option>
+                </select>
               </div>
 
               <div className="flex justify-center pt-6">

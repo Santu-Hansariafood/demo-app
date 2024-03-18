@@ -119,20 +119,40 @@ const MenuBar = () => {
                     Details
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     to="/UpdateSore"
                     className="block hover:text-yellow-200"
                   >
                     Update
                   </Link>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <Link
                     to="/DeleteStore"
                     className="block hover:text-yellow-200"
                   >
                     Delete
+                  </Link>
+                </li> */}
+              </ul>
+            )}
+          </li>
+          <li className="py-2">
+            <div
+              onClick={() => toggleDropdown("admin")}
+              className="cursor-pointer font-bold hover:text-yellow-200"
+            >
+              Admin {dropdownOpen === "admin" ? "-" : "+"}
+            </div>
+            {dropdownOpen === "admin" && (
+              <ul className="pl-4">
+                <li>
+                  <Link
+                    to="/AdminLogin"
+                    className="block hover:text-yellow-200"
+                  >
+                    Admin Login
                   </Link>
                 </li>
               </ul>
