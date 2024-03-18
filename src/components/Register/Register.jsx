@@ -147,7 +147,7 @@ const AddressDetails = ({ formData, onStateChange, handleInputChange }) => {
 const Register = () => {
   const [role, setRole] = useState("");
   const [farmerDeals, setFarmerDeals] = useState("");
-  const [registerBy,setRegisterBy]=useState('');
+  const [registerBy, setRegisterBy] = useState("");
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -163,6 +163,7 @@ const Register = () => {
     pinCode: "",
     role: "",
     farmerDeals: "",
+    registerBy:"",
     account: "",
     acName: "",
     ifsc: "",
@@ -182,7 +183,6 @@ const Register = () => {
       [name]: value,
     });
   };
-  
 
   const handleFileInputChange = (event) => {
     const { name, files } = event.target;
@@ -200,10 +200,10 @@ const Register = () => {
     setFormData({ ...formData, farmerDeals: event.target.value });
   };
 
-  const handleRegisterByChange=(event)=>{
+  const handleRegisterByChange = (event) => {
     setRegisterBy(event.target.value);
-    setFormData({...formData,registerBy:event.target.value})
-  }
+    setFormData({ ...formData, registerBy: event.target.value });
+  };
 
   const handleStateChange = (selectedState) => {
     setFormData({ ...formData, state: selectedState });
@@ -220,7 +220,7 @@ const Register = () => {
   //       "https://hansaria-server.onrender.com/register",
   //       formData
   //     );
-      
+
   //     console.log("Registration successful!");
   //     if (!validateEmail(formData.email)) {
   //       alert("Please enter a valid email address.");
@@ -265,7 +265,13 @@ const Register = () => {
 
       const formDataToSend = new FormData();
       Object.entries(formData).forEach(([key, value]) => {
-        if (key === 'adharCard' || key === 'panCard' || key === 'gstCard' || key === 'passCard' || key === 'farmarPhoto') {
+        if (
+          key === "adharCard" ||
+          key === "panCard" ||
+          key === "gstCard" ||
+          key === "passCard" ||
+          key === "farmarPhoto"
+        ) {
           formDataToSend.append(key, value);
         } else {
           formDataToSend.set(key, value);
@@ -419,7 +425,7 @@ const Register = () => {
                 >
                   Upload Adhar card
                 </label>
-                
+
                 <input
                   type="file"
                   name="adharCard"

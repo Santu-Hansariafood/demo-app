@@ -12,7 +12,7 @@ const RegisterList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/register");
+        const response = await axios.get("https://hansaria-server.onrender.com/register");
         setFarmers(response.data);
         setSuccessMessage("Live");
       } catch (error) {
@@ -44,6 +44,7 @@ const RegisterList = () => {
                 <th className="px-4 py-2 text-white">Village</th>
                 <th className="px-4 py-2 text-white">District</th>
                 <th className="px-4 py-2 text-white">PIN CODE</th>
+                <th className="px-4 py-2 text-white">Register By</th>
                 <th className="px-4 py-2 text-white">Action</th>
               </tr>
             </thead>
@@ -61,6 +62,7 @@ const RegisterList = () => {
                   <td className="border px-4 py-2">{farmer.village}</td>
                   <td className="border px-4 py-2">{farmer.district}</td>
                   <td className="border px-4 py-2">{farmer.pinCode}</td>
+                  <td className="border px-4 py-2">{farmer.registerBy}</td>
                   <td className="border px-4 py-2 flex space-x-2">
                     <Link
                       to={{

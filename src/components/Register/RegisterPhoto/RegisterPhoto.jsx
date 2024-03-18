@@ -26,7 +26,7 @@ const RegisterPhoto = () => {
     formData.append("bankAccount", bankAccount);
     formData.append("profilePhoto", profilePhoto);
     try {
-      await axios.post("http://localhost:3000/registerPhoto", formData, {
+      await axios.post("https://hansaria-server.onrender.com/registerPhoto", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }

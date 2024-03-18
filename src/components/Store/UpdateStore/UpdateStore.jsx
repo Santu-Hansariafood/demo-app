@@ -18,7 +18,7 @@ const UpdateStore = () => {
     const fetchStoreDetails = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/registerStore/${id}`
+          `https://hansaria-server.onrender.com/registerStore/${id}`
         );
         if (response.ok) {
           const data = await response.json();
@@ -47,7 +47,7 @@ const UpdateStore = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3000/registerStore/${id}`,
+        `https://hansaria-server.onrender.com/registerStore/${id}`,
         {
           method: "PUT",
           headers: {

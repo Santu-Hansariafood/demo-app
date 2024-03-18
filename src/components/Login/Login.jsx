@@ -14,7 +14,7 @@ const Login = () => {
     event.preventDefault();
     try {
       const response = await axios.get(
-        `http://localhost:3000/register?mobile=${username}`
+        `https://hansaria-server.onrender.com/register?mobile=${username}`
       );
 
       console.log("API Response:", response.data);
