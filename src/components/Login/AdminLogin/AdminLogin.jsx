@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 const AdminLogin = () => {
   const [username, setUsername] = useState("");
@@ -9,10 +10,26 @@ const AdminLogin = () => {
     // Check if username and password match the expected values
     if (username === "admin" && password === "1234") {
       // Handle successful login
-      alert("Login successful");
+      Swal.fire({
+        icon: "success",
+        title: "Signed in successfully",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
     } else {
       // Handle login failure
-      alert("Login failed. Invalid username or password.");
+      Swal.fire({
+        icon: "error",
+        title: "Login failed",
+        text: "Invalid username or password",
+      });
     }
   };
 

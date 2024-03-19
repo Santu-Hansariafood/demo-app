@@ -105,7 +105,7 @@ const StoreDetails = () => {
                   <td className="border px-4 py-2">
                     {store.storeMobileNumber}
                   </td>
-                  <td className="border px-4 py-2 flex space-x-2">
+                  <td className="border px-4 py-4 flex space-x-2">
                     <Link
                       to={{ pathname: `/store/${store._id}`, state: { store } }}
                     >

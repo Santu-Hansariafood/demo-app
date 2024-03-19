@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const EmployeeLogin = () => {
   const [formData, setFormData] = useState({
@@ -16,11 +17,11 @@ const EmployeeLogin = () => {
     e.preventDefault();
     let isvalid = true;
     let validationsError = {};
-    if (formData.mobile.length != 10) {
+    if (formData.mobile.length !== 10) {
       isvalid = false;
       validationsError["mobile"] = "Please enter a valid Mobile Number";
     }
-    if (!formData.password || formData.password.length === null) {
+    if (!formData.password || formData.password.length === 0) {
       isvalid = false;
       validationsError["password"] = "Wrong Password.";
     }
@@ -28,10 +29,16 @@ const EmployeeLogin = () => {
     axios
       .get("https://hansaria-server.onrender.com/employeeRegister")
       .then((result) => {
-        result.data.map((user) => {
+        result.data.forEach((user) => {
           if (user.mobile === formData.mobile) {
             if (user.password === formData.password) {
-              alert("Logged In Successfully");
+              Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: "Logged In Successfully",
+                showConfirmButton: false,
+                timer: 3000,
+              });
               navigate("/Register");
             } else {
               isvalid = false;
@@ -46,7 +53,11 @@ const EmployeeLogin = () => {
         setValid(isvalid);
       })
       .catch((err) => {
-        alert(err.response.data.msg);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.response.data.msg,
+        });
       });
   };
 

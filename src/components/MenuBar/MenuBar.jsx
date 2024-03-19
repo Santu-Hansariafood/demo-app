@@ -119,22 +119,6 @@ const MenuBar = () => {
                     Details
                   </Link>
                 </li>
-                {/* <li>
-                  <Link
-                    to="/UpdateSore"
-                    className="block hover:text-yellow-200"
-                  >
-                    Update
-                  </Link>
-                </li> */}
-                {/* <li>
-                  <Link
-                    to="/DeleteStore"
-                    className="block hover:text-yellow-200"
-                  >
-                    Delete
-                  </Link>
-                </li> */}
               </ul>
             )}
           </li>
@@ -153,6 +137,92 @@ const MenuBar = () => {
                     className="block hover:text-yellow-200"
                   >
                     Admin Login
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </li>
+          <li className="py-2">
+            <div
+              onClick={() => toggleDropdown("buyer")}
+              className="cursor-pointer font-bold hover:text-yellow-200"
+            >
+              Buyer {dropdownOpen === "buyer" ? "-" : "+"}
+            </div>
+            {dropdownOpen === "buyer" && (
+              <ul className="pl-4">
+                <li>
+                  <Link
+                    to="/Buyer"
+                    className="block hover:text-yellow-200"
+                  >
+                    Buyer
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/BuyerList"
+                    className="block hover:text-yellow-200"
+                  >
+                    Buyer List
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </li>
+          <li className="py-2">
+            <div
+              onClick={() => toggleDropdown("transport")}
+              className="cursor-pointer font-bold hover:text-yellow-200"
+            >
+              Transport {dropdownOpen === "transport" ? "-" : "+"}
+            </div>
+            {dropdownOpen === "transport" && (
+              <ul className="pl-4">
+                <li>
+                  <Link
+                    to="/Transport"
+                    className="block hover:text-yellow-200"
+                  >
+                    Transport
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/TransportList"
+                    className="block hover:text-yellow-200"
+                  >
+                    Transport List
+                  </Link>
+                </li>
+              </ul>
+              
+            )}
+
+          </li>
+          <li className="py-2">
+            <div
+              onClick={() => toggleDropdown("supplier")}
+              className="cursor-pointer font-bold hover:text-yellow-200"
+            >
+              Supplier {dropdownOpen === "supplier" ? "-" : "+"}
+            </div>
+            {dropdownOpen === "supplier" && (
+              <ul className="pl-4">
+                <li>
+                  <Link
+                    to="/SupplierRegister"
+                    className="block hover:text-yellow-200"
+                  >
+                    Supplier Register
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/SupplierList"
+                    className="block hover:text-yellow-200"
+                  >
+                    Supplier List
                   </Link>
                 </li>
               </ul>
