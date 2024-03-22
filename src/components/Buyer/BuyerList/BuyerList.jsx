@@ -6,7 +6,7 @@ import axios from "axios";
 import { RiseLoader } from "react-spinners";
 
 function BuyerList() {
-  const [loading, setLoading] = useState(false); //make it true when api is intergrate
+  const [loading, setLoading] = useState(true); //make it true when api is intergrate
   const data = [
     {
       name: "John Doe",

@@ -152,18 +152,12 @@ const MenuBar = () => {
             {dropdownOpen === "buyer" && (
               <ul className="pl-4">
                 <li>
-                  <Link
-                    to="/Buyer"
-                    className="block hover:text-yellow-200"
-                  >
+                  <Link to="/Buyer" className="block hover:text-yellow-200">
                     Buyer
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/BuyerList"
-                    className="block hover:text-yellow-200"
-                  >
+                  <Link to="/BuyerList" className="block hover:text-yellow-200">
                     Buyer List
                   </Link>
                 </li>
@@ -180,10 +174,7 @@ const MenuBar = () => {
             {dropdownOpen === "transport" && (
               <ul className="pl-4">
                 <li>
-                  <Link
-                    to="/Transport"
-                    className="block hover:text-yellow-200"
-                  >
+                  <Link to="/Transport" className="block hover:text-yellow-200">
                     Transport
                   </Link>
                 </li>
@@ -196,9 +187,7 @@ const MenuBar = () => {
                   </Link>
                 </li>
               </ul>
-              
             )}
-
           </li>
           <li className="py-2">
             <div

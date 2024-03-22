@@ -1,6 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 const Buyer = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    mobile: "",
+    email: "",
+    password: "",
+    isFirstLogin: false,
+    location: "",
+    gstNo: "",
+    billingAddress: "",
+    shippingAddress: "",
+    mappedFinancer: "",
+    selectedState: "",
+    panNo: "",
+    selectedCityOrigin: "",
+    buyersOtherCompanies: [],
+    buyersConsignees: []
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3000/buyer", formData);
+      console.log("Buyer created:", response.data);
+      // Reset form fields after successful submission
+      setFormData({
+        name: "",
+        mobile: "",
+        email: "",
+        password: "",
+        isFirstLogin: false,
+        location: "",
+        gstNo: "",
+        billingAddress: "",
+        shippingAddress: "",
+        mappedFinancer: "",
+        selectedState: "",
+        panNo: "",
+        selectedCityOrigin: "",
+        buyersOtherCompanies: [],
+        buyersConsignees: []
+      });
+    } catch (error) {
+      console.error("Error creating buyer:", error);
+    }
+  };
+
+
   return (
     <div className="max-w-screen-lg mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold mb-4 text-center text-green-500">
@@ -9,7 +65,7 @@ const Buyer = () => {
       <div className="flex flex-col md:flex-row justify-center">
         {/* Left Column */}
         <div className="md:w-1/2 px-4">
-          <div className="mb-4">
+        <div className="mb-4">
             <label
               className="block text-green-500 text-sm font-bold mb-2"
               htmlFor="name"
@@ -21,6 +77,9 @@ const Buyer = () => {
               id="name"
               type="text"
               placeholder="Name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4">
@@ -35,6 +94,8 @@ const Buyer = () => {
               id="mobile"
               type="tel"
               placeholder="Mobile"
+              value={formData.mobile}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4">
@@ -49,6 +110,8 @@ const Buyer = () => {
               id="email"
               type="email"
               placeholder="Email Address"
+              value={formData.email}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4">
@@ -63,6 +126,8 @@ const Buyer = () => {
               id="password"
               type="password"
               placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4">
@@ -76,6 +141,8 @@ const Buyer = () => {
               className="mr-2 leading-tight"
               id="is_first_login"
               type="checkbox"
+              value={formData.isFirstLogin}
+              onChange={handleChange}
             />
             <span className="text-sm">Yes</span>
           </div>
@@ -95,46 +162,54 @@ const Buyer = () => {
               id="location"
               type="text"
               placeholder="Location"
+              value={formData.location}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4">
             <label
               className="block text-green-500 text-sm font-bold mb-2"
-              htmlFor="gst_no"
+              htmlFor="gstNo"
             >
               GST No.:
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-green-500 leading-tight focus:outline-none focus:shadow-outline"
-              id="gst_no"
+              id="gstNo"
               type="text"
               placeholder="GST No."
+              value={formData.gstNo}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4">
             <label
               className="block text-green-500 text-sm font-bold mb-2"
-              htmlFor="billing_address"
+              htmlFor="billingAddress"
             >
               Billing Address:
             </label>
             <textarea
               className="shadow appearance-none border rounded w-full py-2 px-3 text-green-500 leading-tight focus:outline-none focus:shadow-outline"
-              id="billing_address"
+              id="billingAddress"
               placeholder="Billing Address"
+              value={formData.billingAddress}
+              onChange={handleChange}
             ></textarea>
           </div>
           <div className="mb-4">
             <label
               className="block text-green-500 text-sm font-bold mb-2"
-              htmlFor="shipping_address"
+              htmlFor="shippingAddress"
             >
               Shipping Address:
             </label>
             <textarea
               className="shadow appearance-none border rounded w-full py-2 px-3 text-green-500 leading-tight focus:outline-none focus:shadow-outline"
-              id="shipping_address"
+              id="shippingAddress"
               placeholder="Shipping Address"
+              value={formData.shippingAddress}
+              onChange={handleChange}
             ></textarea>
           </div>
           <div className="mb-4">
@@ -149,6 +224,8 @@ const Buyer = () => {
               id="mapped_financer"
               type="text"
               placeholder="Mapped Financer"
+              value={formData.mappedFinancer}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4">
@@ -161,6 +238,8 @@ const Buyer = () => {
             <select
               className="shadow appearance-none border rounded w-full py-2 px-3 text-green-500 leading-tight focus:outline-none focus:shadow-outline"
               id="state"
+              value={formData.selectedState}
+              onChange={handleChange}
             >
               {/* Options for states go here */}
             </select>
@@ -168,15 +247,17 @@ const Buyer = () => {
           <div className="mb-4">
             <label
               className="block text-green-500 text-sm font-bold mb-2"
-              htmlFor="pan_no"
+              htmlFor="panNo"
             >
               PAN No.:
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-green-500 leading-tight focus:outline-none focus:shadow-outline"
-              id="pan_no"
+              id="panNo"
               type="text"
               placeholder="PAN No."
+              value={formData.panNo}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4">
@@ -189,6 +270,8 @@ const Buyer = () => {
             <select
               className="shadow appearance-none border rounded w-full py-2 px-3 text-green-500 leading-tight focus:outline-none focus:shadow-outline"
               id="city_origin"
+              value={formData.selectedCityOrigin}
+              onChange={handleChange}
             ></select>
           </div>
           <div className="mb-4">
@@ -202,6 +285,8 @@ const Buyer = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-green-500 leading-tight focus:outline-none focus:shadow-outline"
               id="buyers_other_companies"
               multiple
+              value={formData.buyersOtherCompanies}
+              onChange={handleChange}
             ></select>
           </div>
           <div className="mb-4">
@@ -215,6 +300,8 @@ const Buyer = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-green-500 leading-tight focus:outline-none focus:shadow-outline"
               id="buyers_consignees"
               multiple
+              value={formData.shippingAddress}
+              onChange={handleChange}
             ></select>
           </div>
         </div>
@@ -222,7 +309,7 @@ const Buyer = () => {
       <div className="flex justify-center mt-8">
         <button
           className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="button"
+          type="submit"
         >
           Register Buyer
         </button>

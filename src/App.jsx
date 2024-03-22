@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login/Login";
@@ -21,7 +22,7 @@ import Buyer from "./components/Buyer/Buyer";
 import BuyerList from "./components/Buyer/BuyerList/BuyerList";
 import Transport from "./components/Transport/Transport";
 import TransportList from "./components/Transport/TransportList/TransportList";
-import EditTransport from "./components/Transport/EditTransport/EditTransport";
+import EditTransport from './components/Transport/EditTransport/EditTransport';
 import TransportDetails from "./components/Transport/TransportDetails/TransportDetails";
 import EditBuyer from "./components/Buyer/EditBuyer/EditBuyer";
 import BuyerDetails from "./components/Buyer/BuyerDetails/BuyerDetails";
@@ -29,8 +30,14 @@ import SupplierRegister from "./components/Supplier/SupplierRegister";
 import EditSupplier from "./components/Supplier/EditSupplier/EditSupplier";
 import SupplierDetails from "./components/Supplier/SupplierDetails/SupplierDetails";
 import SupplierList from "./components/Supplier/SupplierList/SupplierList";
+import WelcomeModal from "./WelcomeModal/WelcomeModal";
 
 function App() {
+  const [showWelcomeModal, setShowWelcomeModal] = useState(true);
+
+  const handleCloseWelcomeModal = () => {
+    setShowWelcomeModal(false);
+  };
   return (
     <>
       <BrowserRouter>
@@ -68,9 +75,10 @@ function App() {
           <Route path="/SupplierRegister" element={<SupplierRegister />} />
           <Route path="/SupplierList" element={<SupplierList />} />
           <Route path="/EditSupplier/:id" element={<EditSupplier />} />
-          <Route path="/SupplierDetails/:id" element={<SupplierDetails />} />
+          <Route path="/supplier/:id" element={<SupplierDetails />} />
         </Routes>
       </BrowserRouter>
+      <WelcomeModal isOpen={showWelcomeModal} onClose={handleCloseWelcomeModal} />
     </>
   );
 }

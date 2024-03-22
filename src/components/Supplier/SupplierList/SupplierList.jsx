@@ -1,28 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaRegEye, FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { RiseLoader } from "react-spinners";
 
 const SupplierList = () => {
-  const [loading, setLoading] = useState(false); // Set to true when integrating with API
-  const suppliers = [
-    {
-      companyName: "ABC Corporation",
-      location: "New York",
-      billingAddress: "123 Main St, New York, NY",
-      gstNo: "GST123456789",
-      panNo: "ABCDE1234F",
-    },
-    {
-      companyName: "XYZ Enterprises",
-      location: "Los Angeles",
-      billingAddress: "456 Oak St, Los Angeles, CA",
-      gstNo: "GST987654321",
-      panNo: "XYZAB6789C",
-    },
-    // Add more supplier data as needed
-  ];
+  const [supplierDetails, setSupplierDetails] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSupplierDetails = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/suppliers");
+        if (response.status === 200) {
+          setSupplierDetails(response.data);
+          setLoading(false);
+        } else {
+          throw new Error("Failed to fetch Supplier details");
+        }
+      } catch (error) {
+        console.error("Error fetching Supplier details:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchSupplierDetails();
+  }, []);
+
+  const handleDelete = async (supplierId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this Supplier?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const response = await axios.delete(
+        `http://localhost:3000/suppliers/${supplierId}`
+      );
+      if (response.status === 200) {
+        setSupplierDetails((prevDetails) =>
+          prevDetails.filter((supplier) => supplier._id !== supplierId)
+        );
+        console.log("Supplier deleted successfully!");
+      } else {
+        throw new Error("Failed to delete Supplier");
+      }
+    } catch (error) {
+      console.error("Error deleting supplier:", error);
+    }
+  };
 
   if (loading) {
     return (
@@ -44,76 +71,77 @@ const SupplierList = () => {
   return (
     <div className="overflow-x-auto p-4">
       <h2 className="text-xl font-bold mb-4 text-center text-green-500">
-        Supplier List
+        All Supplier List
       </h2>
-      <table className="table-auto border-collapse w-full">
-        <thead>
-          <tr className="bg-green-500">
-            <th className="border border-green-500 px-4 py-2 text-white">
-              Company Name
-            </th>
-            <th className="border border-green-500 px-4 py-2 text-white">
-              Location
-            </th>
-            <th className="border border-green-500 px-4 py-2 text-white">
-              Billing Address
-            </th>
-            <th className="border border-green-500 px-4 py-2 text-white">
-              GST No.
-            </th>
-            <th className="border border-green-500 px-4 py-2 text-white">
-              PAN No.
-            </th>
-            <th className="border border-green-500 px-4 py-2 text-white">
-              Action
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {suppliers.map((supplier, index) => (
-            <tr
-              key={index}
-              className={index % 2 === 0 ? "bg-green-100" : "bg-green-200"}
-            >
-              <td className="border border-green-400 px-4 py-2">
-                {supplier.companyName}
-              </td>
-              <td className="border border-green-400 px-4 py-2">
-                {supplier.location}
-              </td>
-              <td className="border border-green-400 px-4 py-2">
-                {supplier.billingAddress}
-              </td>
-              <td className="border border-green-400 px-4 py-2">
-                {supplier.gstNo}
-              </td>
-              <td className="border border-green-400 px-4 py-2">
-                {supplier.panNo}
-              </td>
-              <td className="border border-green-400 px-4 py-4 flex space-x-2">
-                <Link to={`/SupplierDetails/${index + 1}`}>
-                  <FaRegEye
-                    title="View"
-                    style={{ cursor: "pointer", color: "green" }}
-                  />
-                </Link>
-                <Link to="#">
-                  <FaEdit
-                    title="Edit"
-                    style={{ cursor: "pointer", color: "blue" }}
-                  />
-                </Link>
-                <Link>
+      <div className="max-w-full overflow-x-auto">
+        <table className="table-auto border-collapse w-full">
+          <thead>
+            <tr className="bg-green-500">
+              <th className="border border-green-500 px-4 py-2 text-white">
+                Supplier Name
+              </th>
+              <th className="border border-green-500 px-4 py-2 text-white">
+                Supplier Mobile
+              </th>
+              <th className="border border-green-500 px-4 py-2 text-white">
+                Shipping Address
+              </th>
+              <th className="border border-green-500 px-4 py-2 text-white">
+                Location
+              </th>
+              <th className="border border-green-500 px-4 py-2 text-white">
+                GST Number
+              </th>
+              <th className="border border-green-500 px-4 py-2 text-white">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {supplierDetails.map((supplier, index) => (
+              <tr
+                key={index}
+                className={index % 2 === 0 ? "bg-green-100" : "bg-green-200"}
+              >
+                <td className="border border-green-400 px-4 py-2">
+                  {supplier.supplierName}
+                </td>
+                <td className="border border-green-400 px-4 py-2">
+                  {supplier.supplierMobile}
+                </td>
+                <td className="border border-green-400 px-4 py-2">
+                  {supplier.supplierShipingAddress}
+                </td>
+                <td className="border border-green-400 px-4 py-2">
+                  {supplier.supplierLocation}
+                </td>
+                <td className="border border-green-400 px-4 py-2">
+                  {supplier.supplierGSTno}
+                </td>
+                <td className="border border-green-400 px-4 py-4 flex space-x-2">
+                  <Link to={{ pathname: `/supplier/${supplier._id}`, state: { supplier } }}>
+                    <FaRegEye
+                      title="View"
+                      style={{ cursor: "pointer", color: "green" }}
+                    />
+                  </Link>
+                  <Link to={`/EditSupplier/${supplier._id}`}>
+                    <FaEdit
+                      title="Edit"
+                      style={{ cursor: "pointer", color: "blue" }}
+                    />
+                  </Link>
                   <MdDeleteForever
                     title="Delete"
                     style={{ cursor: "pointer", color: "red" }}
+                    onClick={() => handleDelete(supplier._id)}
                   />
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
